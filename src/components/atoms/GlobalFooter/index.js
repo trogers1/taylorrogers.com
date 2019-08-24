@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { pink, yellow } from 'helpers/colors';
+
 import ExternalLink from 'components/atoms/ExternalLink';
 
 const Footer = styled.footer`
@@ -9,18 +11,17 @@ const Footer = styled.footer`
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
-  height: 8rem;
+  height: 2rem;
   display: flex;
   flex-direction: column;
 
   align-items: center;
-  background: black;
+  background: ${pink};
   padding: 0 2rem;
-  color: white;
+  color: ${yellow};
   font-size: 1.1rem;
 
   @media (min-width: 800px) {
-    height: 5rem;
     flex-direction: row;
     justify-content: space-between;
   }
