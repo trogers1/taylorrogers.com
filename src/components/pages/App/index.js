@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 
 import GlobalFooter from 'components/atoms/GlobalFooter';
 import GlobalHeader from 'components/atoms/GlobalHeader';
@@ -28,7 +28,7 @@ const App = () => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/blog" render={() => <div>Coming soon...</div>} />
             <Route exact path="/about" render={() => <div>Coming soon...</div>} />
-            <Route render={() => <div>NOT FOUND Coming soon...</div>} />
+            <Redirect to="/" />
           </Switch>
         </BodyWrapper>
       </Flex>
