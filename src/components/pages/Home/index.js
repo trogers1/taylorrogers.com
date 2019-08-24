@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Redirect } from 'react-router-dom';
 
 import CircleButton from 'components/atoms/CircleButton';
 
@@ -10,8 +9,6 @@ const Centered = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const renderRedirect = path => <Redirect to={path} />;
 
 const HomePage = () => {
   return (
