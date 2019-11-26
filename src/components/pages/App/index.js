@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import GlobalFooter from 'components/atoms/GlobalFooter';
 import GlobalHeader from 'components/atoms/GlobalHeader';
 import ScrollToTop from 'components/atoms/ScrollToTop';
+import PageViews from 'components/organisms/PageViews';
 import HomePage from 'components/pages/Home';
 import Blog from 'components/pages/Blog';
 
@@ -21,6 +22,7 @@ const Flex = styled.div`
 const App = () => {
   return (
     <Router>
+      <PageViews />
       <ScrollToTop />
       <Flex>
         <GlobalHeader />
