@@ -5,7 +5,7 @@ import truncate from 'helpers/truncate';
 
 import HeadingLarge from 'components/atoms/HeadingLarge';
 import Grid from 'components/atoms/Grid';
-import Card from 'components/molecules/SmallCard';
+import Card from 'components/molecules/SmallCardLink';
 
 const StyledGrid = styled(Grid)`
   margin-bottom: 5rem;
