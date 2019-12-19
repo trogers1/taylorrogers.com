@@ -6,10 +6,9 @@ frontend:
         - npm install
     build:
       commands:
-        - if [ "${AWS_BRANCH}" == "master" ]; then echo "master branch"; fi
-        - if [ "${AWS_BRANCH}" == "qa" ]; then echo "qa branch"; fi
-        - if [ "${AWS_BRANCH}" != "master" ] && [ "${AWS_BRANCH}" != "qa" ]; then echo "other branch"; fi
-        - npm run build
+        - if [ "${AWS_BRANCH}" == "master" ]; then npm run build:prod; fi
+        - if [ "${AWS_BRANCH}" == "qa" ]; then npm run build:qa; fi
+        - if [ "${AWS_BRANCH}" != "master" ] && [ "${AWS_BRANCH}" != "qa" ]; then npm run build; fi
   artifacts:
     baseDirectory: build
     files:
