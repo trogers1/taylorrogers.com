@@ -10,7 +10,9 @@ import HomePage from 'components/pages/Home';
 import Blog from 'components/pages/Blog';
 
 const BodyWrapper = styled.div`
+  box-sizing: border-box;
   padding-top: 6rem;
+  width: 100%;
 `;
 const Flex = styled.div`
   min-height: 100%;
