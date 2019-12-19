@@ -18,6 +18,7 @@ const Centered = styled.div`
 `;
 
 const BlogPage = ({ location }) => {
+  const { hash } = location;
   const overrides = getOverrides(location);
   const [article, setArticle] = useState('');
   let blogId = location.pathname;
@@ -29,11 +30,10 @@ const BlogPage = ({ location }) => {
       setArticle(res.data.attributes);
     }
     getArticle();
-  }, []);
+  }, [blogId]);
 
   // Scroll to hash, if present
   useEffect(() => {
-    const { hash } = location;
     const id = hash.replace(/#/g, '');
     if (hash && document.getElementById(id)) {
       const scrollOffset = -60;
@@ -41,7 +41,7 @@ const BlogPage = ({ location }) => {
       const scrollTo = element.getBoundingClientRect().top + window.pageYOffset + scrollOffset;
       window.scrollTo({ top: scrollTo, behavior: 'smooth' });
     }
-  }, [location.hash, article]); // Fires every time hash changes or article is loaded
+  }, [hash, article]); // Fires every time hash changes or article is loaded
 
   return (
     <Centered>
