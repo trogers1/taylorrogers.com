@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { pink, yellow } from 'helpers/colors';
+import { mutedOrange, mutedBlue } from 'helpers/colors';
 
 const LargeHeader = styled.div`
-  color: ${yellow};
-  border-bottom: 0.5rem solid ${pink};
+  color: ${mutedOrange};
+  border-bottom: 0.5rem solid ${mutedBlue};
   font-size: 4rem;
   font-style: italic;
   font-weight: 900;

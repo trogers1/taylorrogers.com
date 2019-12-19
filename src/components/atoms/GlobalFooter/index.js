@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { pink, yellow } from 'helpers/colors';
+import { mutedYellow, siteBackground } from 'helpers/colors';
 
 import ExternalLink from 'components/atoms/ExternalLink';
 
@@ -9,6 +9,9 @@ const Footer = styled.footer`
   position: fixed;
   left: 0;
   bottom: 0;
+  background: ${siteBackground};
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+
   width: 100%;
   box-sizing: border-box;
   height: 2rem;
@@ -16,9 +19,8 @@ const Footer = styled.footer`
   flex-direction: column;
 
   align-items: center;
-  background: ${pink};
   padding: 0 2rem;
-  color: ${yellow};
+  color: ${mutedYellow};
   font-size: 1.1rem;
 
   @media (min-width: 800px) {
@@ -28,18 +30,18 @@ const Footer = styled.footer`
 `;
 
 const LeftItems = styled.div`
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 1.5rem;
   margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
 
   @media (min-width: 800px) {
-    margin: 0;
-    width: 36rem;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0;
+    width: unset;
   }
 `;
 

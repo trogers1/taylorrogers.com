@@ -2,14 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { mutedBlue } from 'helpers/colors';
+
 const StyledA = styled.a`
-  color: red;
-  font-size: 1.6rem;
-  text-decoration: none;
-  :hover,
-  :focus {
-    text-decoration: underline;
-  }
+  color: ${mutedBlue};
 `;
 
 const ExternalLink = ({ url, children, ...other }) => {

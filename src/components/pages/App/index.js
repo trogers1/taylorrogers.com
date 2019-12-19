@@ -5,11 +5,14 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 import GlobalFooter from 'components/atoms/GlobalFooter';
 import GlobalHeader from 'components/atoms/GlobalHeader';
 import ScrollToTop from 'components/atoms/ScrollToTop';
+import PageViews from 'components/organisms/PageViews';
 import HomePage from 'components/pages/Home';
 import Blog from 'components/pages/Blog';
 
 const BodyWrapper = styled.div`
+  box-sizing: border-box;
   padding-top: 6rem;
+  width: 100%;
 `;
 const Flex = styled.div`
   min-height: 100%;
@@ -21,6 +24,7 @@ const Flex = styled.div`
 const App = () => {
   return (
     <Router>
+      <PageViews />
       <ScrollToTop />
       <Flex>
         <GlobalHeader />

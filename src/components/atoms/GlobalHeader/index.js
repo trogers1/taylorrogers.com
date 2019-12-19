@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { pink, yellow } from 'helpers/colors';
+import { mutedYellow, siteBackground } from 'helpers/colors';
 
 const HeaderText = styled(Link)`
-  color: ${yellow};
-  font-size: 4rem;
+  color: ${mutedYellow};
+  font-size: 3rem;
   font-weight: 900;
   font-style: italic;
   letter-spacing: 0.25rem;
   margin-right: 1rem;
   text-decoration: none;
+  transition: 0.2s;
   @media screen and (min-width: 800px) {
-    font-size: 4rem;
     margin-left: 0.5rem;
-    margin-top: 1.5rem;
   }
 `;
 
 const StyledDiv = styled.header`
   align-items: center;
-  background: ${pink};
+  background: ${siteBackground};
   box-sizing: border-box;
+  ${({ shadow }) => (shadow ? 'box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);' : 'box-shadow: none;')}
   display: flex;
   font-size: 1.2rem;
-  height: 4.5rem;
+  height: 3rem;
   left: 0;
   justify-content: flex-end;
   top: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   @media screen and (min-width: 800px) {
     font-size: 0.85rem;
@@ -39,8 +39,21 @@ const StyledDiv = styled.header`
 `;
 
 const GlobalHeader = () => {
+  const [headerStyles, setHeaderStyles] = useState({
+    fontSize: '3rem',
+    height: '3rem',
+    shadow: false
+  });
+  window.onscroll = () => {
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+      setHeaderStyles({ ...headerStyles, shadow: true });
+    } else {
+      setHeaderStyles({ ...headerStyles, shadow: false });
+    }
+  };
+
   return (
-    <StyledDiv>
+    <StyledDiv {...headerStyles}>
       <HeaderText aria-label="Taylor-Rogers.com" to="/">
         Taylor-Rogers.com
       </HeaderText>
