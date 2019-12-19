@@ -4,9 +4,12 @@ import config from 'config/config';
 
 import BlogHome from 'components/organisms/BlogHome';
 import BlogPost from 'components/organisms/BlogPost';
+import NotFound from 'components/pages/NotFound';
 
 const Blog = ({ location }) => {
   const [validBlogPosts, setValidBlogPosts] = useState([]);
+  let currBlogId = location.pathname.split('/')[2];
+  let currBlogType = location.pathname.split('/')[1];
   useEffect(() => {
     async function getArticles() {
       let res = await fetch(`${config.blogApiUrl}/blog/`, { method: 'GET' });
@@ -14,7 +17,10 @@ const Blog = ({ location }) => {
       setValidBlogPosts(res.data);
     }
     getArticles();
-  }, []);
+  });
+  if (validBlogPosts.length && currBlogId && !validBlogPosts.some(post => post.id === currBlogId)) {
+    return <Route to={`/${currBlogType}/${currBlogId}`} exact component={NotFound} />;
+  }
   return (
     <Switch>
       <Route path="/blog" exact component={BlogHome} />
@@ -27,7 +33,6 @@ const Blog = ({ location }) => {
           component={BlogPost}
         />
       ))}
-      <Redirect to="/" />
     </Switch>
   );
 };
