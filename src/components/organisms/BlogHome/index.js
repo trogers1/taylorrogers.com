@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import truncate from 'helpers/truncate';
+import config from 'config/config';
 
 import HeadingLarge from 'components/atoms/HeadingLarge';
 import Grid from 'components/atoms/Grid';
@@ -21,19 +21,26 @@ const Centered = styled.div`
 `;
 
 const BlogHome = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    async function getPosts() {
+      let res = await fetch(`${config.blogApiUrl}/blog`, { method: 'GET' });
+      res = await res.json();
+      setPosts(res.data);
+    }
+    getPosts();
+  }, []);
+
   return (
     <Centered>
-      <HeadingLarge>Welcome</HeadingLarge>
+      <HeadingLarge>{posts.length ? 'Welcome' : 'Loading'}</HeadingLarge>
       <StyledGrid>
-        {[1, 2, 3, 4, 5, 6, 7].map(num => (
+        {posts.map(post => (
           <Card
-            key={num}
-            title="This is a fake title"
-            body={truncate(
-              'Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase. Inherits this property from its parent element. Read about inherit. Transforms all characters to lowercase.',
-              350
-            )}
-            to="/blog/blogNumber"
+            key={post.id}
+            title={post.attributes.title}
+            previewText={post.attributes.previewText}
+            to={`/blog/${post.id}`}
           />
         ))}
       </StyledGrid>

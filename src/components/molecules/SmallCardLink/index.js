@@ -32,9 +32,9 @@ const CardBody = styled.div`
   overflow-y: hidden;
 `;
 
-export default ({ title, body, to }) => (
+export default ({ title, previewText, to }) => (
   <Card to={to}>
     <CardTitle>{title}</CardTitle>
-    <CardBody>{body}</CardBody>
+    <CardBody>{previewText}</CardBody>
   </Card>
 );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import config from 'config/config';
 
 import BlogHome from 'components/organisms/BlogHome';
@@ -17,7 +17,7 @@ const Blog = ({ location }) => {
       setValidBlogPosts(res.data);
     }
     getArticles();
-  });
+  }, []);
   if (validBlogPosts.length && currBlogId && !validBlogPosts.some(post => post.id === currBlogId)) {
     return <Route to={`/${currBlogType}/${currBlogId}`} exact component={NotFound} />;
   }
