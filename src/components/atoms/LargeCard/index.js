@@ -12,12 +12,13 @@ export default styled.div`
   margin: 2rem;
   margin-bottom: 5rem;
   max-width: 90%;
-  padding: 1rem;
+  padding: 2rem 4rem;
   text-decoration: none;
   width: auto;
   word-break: break-word;
 
   @media (max-width: 799px) {
+    padding: 2rem 1rem;
     max-width: 100%;
     margin: 2rem 0.5rem;
   }
