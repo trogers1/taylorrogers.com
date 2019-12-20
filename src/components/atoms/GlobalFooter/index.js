@@ -14,7 +14,7 @@ const Footer = styled.footer`
 
   width: 100%;
   box-sizing: border-box;
-  height: 2rem;
+  height: auto;
   display: flex;
   flex-direction: column;
 
@@ -24,6 +24,7 @@ const Footer = styled.footer`
   font-size: 1.1rem;
 
   @media (min-width: 800px) {
+    height: 2rem;
     flex-direction: row;
     justify-content: space-between;
   }
@@ -33,14 +34,15 @@ const LeftItems = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
-  margin-top: 1.5rem;
+  margin: 0;
   width: 100%;
 
   @media (min-width: 800px) {
     flex-direction: row;
     justify-content: space-between;
-    margin: 0;
+
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
     width: unset;
   }
 `;
@@ -53,7 +55,7 @@ const GlobalFooter = () => {
         <div>&copy; Copyright {currentYear}. All Rights Reserved.</div>
       </LeftItems>
       <div>
-        <ExternalLink url="google.com">External Link</ExternalLink>
+        <ExternalLink url="http://github.com/trogers1">Go to Taylor&apos;s GitHub</ExternalLink>
       </div>
     </Footer>
   );
