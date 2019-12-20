@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {
   codeBackgroundDarkBlue,
   codeBorderMutedPurple,
-  mutedDarkBlue,
   mutedYellow,
   mutedOrange
 } from 'helpers/colors';
@@ -11,6 +10,7 @@ import {
 import MdHeader from 'components/atoms/MdHeader';
 import MdLink from 'components/atoms/MdLink';
 import MdCodeBlock from 'components/atoms/MdCodeBlock';
+import MdBlockQuote from 'components/atoms/MdBlockQuote';
 
 const StyledHr = styled.hr`
   color: ${mutedOrange};
@@ -25,12 +25,6 @@ const StyledInlineCode = styled.code`
   padding: 0 0.5rem 0 0.5rem;
 `;
 
-const StyledBlockQuote = styled.blockquote`
-  background: ${mutedDarkBlue};
-  padding: 1rem 2rem;
-  margin: 1rem 2rem;
-`;
-
 export default location => ({
   a: {
     component: MdLink,
@@ -39,7 +33,7 @@ export default location => ({
     }
   },
   blockquote: {
-    component: StyledBlockQuote
+    component: MdBlockQuote
   },
   h2: {
     component: MdHeader,
