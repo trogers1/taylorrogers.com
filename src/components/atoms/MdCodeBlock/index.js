@@ -10,14 +10,18 @@ const StyledCode = styled.code`
 `;
 
 export default ({ children }) => {
-  return (
-    <SyntaxHighlighter
-      language={children.props.className ? children.props.className.replace('lang-', '') : ''}
-      style={style}
-      showLineNumbers={false}
-      CodeTag={StyledCode}
-    >
-      {children.props.children}
-    </SyntaxHighlighter>
-  );
+  if (children.props) {
+    return (
+      <SyntaxHighlighter
+        language={children.props.className ? children.props.className.replace('lang-', '') : ''}
+        style={style}
+        showLineNumbers={false}
+        CodeTag={StyledCode}
+      >
+        {children.props.children}
+      </SyntaxHighlighter>
+    );
+  } else {
+    return children;
+  }
 };
