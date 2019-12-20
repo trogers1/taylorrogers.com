@@ -29,7 +29,7 @@ const BlogHome = () => {
       setPosts(res.data);
     }
     getPosts();
-  });
+  }, []);
 
   return (
     <Centered>
