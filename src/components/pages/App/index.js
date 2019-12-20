@@ -31,7 +31,9 @@ const App = () => {
         <BodyWrapper>
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/blog" component={Blog} />
+            <Route path="/dev" component={Blog} />
+            <Route path="/rpg" component={Blog} />
+            <Route path="/essays" component={Blog} />
             <Route exact path="/about" render={() => <div>Coming soon...</div>} />
             <Redirect to="/" />
           </Switch>

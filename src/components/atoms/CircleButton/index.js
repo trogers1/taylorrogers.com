@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import colors from 'helpers/colors';
 
 const Circle = styled(Link)`
-  background: ${colors.pink};
+  background: ${props => props.color || colors.mutedOrange};
   border-radius: 50%;
   color: ${colors.yellow};
   font-size: 1.6rem;
+  font-weight: 600;
   width: 15rem;
   height: 15rem;
   :hover {
@@ -21,6 +22,16 @@ const Circle = styled(Link)`
   text-decoration: none;
 `;
 
-export default ({ children, to, ...rest }) => {
-  return <Circle to={to}>{children}</Circle>;
+const FlexContainer = styled.div`
+  word-break: break-word;
+  margin: 2rem;
+  text-align: center;
+`;
+
+export default ({ children, to, color, ...rest }) => {
+  return (
+    <Circle color={color} to={to}>
+      <FlexContainer>{children}</FlexContainer>
+    </Circle>
+  );
 };

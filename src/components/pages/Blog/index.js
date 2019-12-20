@@ -12,23 +12,22 @@ const Blog = ({ location }) => {
   let currBlogType = location.pathname.split('/')[1];
   useEffect(() => {
     async function getArticles() {
-      let res = await fetch(`${config.blogApiUrl}/blog/`, { method: 'GET' });
+      let res = await fetch(`${config.blogApiUrl}/blog/?type=${currBlogType}`, { method: 'GET' });
       res = await res.json();
       setValidBlogPosts(res.data);
     }
     getArticles();
-  }, []);
+  }, [currBlogType]);
   if (validBlogPosts.length && currBlogId && !validBlogPosts.some(post => post.id === currBlogId)) {
     return <Route to={`/${currBlogType}/${currBlogId}`} exact component={NotFound} />;
   }
   return (
     <Switch>
-      <Route path="/blog" exact component={BlogHome} />
-      <Route key={`blogPost-kong`} path={`/blog/kong`} exact component={BlogPost} />
+      <Route path={`/${currBlogType}`} exact component={BlogHome} />
       {validBlogPosts.map(blogPost => (
         <Route
-          key={`blogPost-${blogPost.attributes.title}`}
-          path={`/blog/${blogPost.id}`}
+          key={`blogPost-${currBlogType}-${blogPost.attributes.title}`}
+          path={`/${currBlogType}/${blogPost.id}`}
           exact
           component={BlogPost}
         />

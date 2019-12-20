@@ -20,7 +20,8 @@ const Centered = styled.div`
   min-height: 100%;
 `;
 
-const BlogHome = () => {
+const BlogHome = ({ location }) => {
+  let currBlogType = location.pathname.split('/')[1];
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     async function getPosts() {
@@ -40,7 +41,7 @@ const BlogHome = () => {
             key={post.id}
             title={post.attributes.title}
             previewText={post.attributes.previewText}
-            to={`/blog/${post.id}`}
+            to={`/${currBlogType}/${post.id}`}
           />
         ))}
       </StyledGrid>
