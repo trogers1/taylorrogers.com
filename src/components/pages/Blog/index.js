@@ -17,7 +17,7 @@ const Blog = ({ location }) => {
       setValidBlogPosts(res.data);
     }
     getArticles();
-  }, []);
+  }, [currBlogType]);
   if (validBlogPosts.length && currBlogId && !validBlogPosts.some(post => post.id === currBlogId)) {
     return <Route to={`/${currBlogType}/${currBlogId}`} exact component={NotFound} />;
   }
