@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { cardBackground, yellow } from 'helpers/colors';
+import { cardBackground, mutedYellow, textGrey } from 'helpers/colors';
 
 const Card = styled(Link)`
   background: ${cardBackground};
@@ -17,7 +17,7 @@ const Card = styled(Link)`
 `;
 
 const CardTitle = styled.h3`
-  color: ${yellow};
+  color: ${mutedYellow};
   font-size: 2rem;
   font-weight: 700;
   text-align: center;
@@ -25,7 +25,7 @@ const CardTitle = styled.h3`
 `;
 
 const CardBody = styled.div`
-  color: white;
+  color: ${textGrey};
   font-size: 1.5rem;
   font-weight: 300;
   flex-grow: 2;
