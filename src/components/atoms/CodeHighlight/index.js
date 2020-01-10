@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
-import 'highlight.js/styles/hopscotch.css'; // import preferred style
+import 'highlight.js/styles/atom-one-dark.css'; // import preferred style
 
 const registeredLanguages = {};
 
