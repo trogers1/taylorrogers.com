@@ -17,6 +17,13 @@ const Centered = styled.div`
   max-width: 100%;
 `;
 
+const UniversalMdStyles = styled(Markdown)`
+  > * {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+`;
+
 const BlogPage = ({ location }) => {
   const { hash } = location;
   const overrides = getOverrides(location);
@@ -48,7 +55,7 @@ const BlogPage = ({ location }) => {
       <HeadingLarge>{article ? article.title : 'Loading...'}</HeadingLarge>
       {article && (
         <LargeCard>
-          <Markdown options={{ overrides }}>{article.body}</Markdown>
+          <UniversalMdStyles options={{ overrides }}>{article.body}</UniversalMdStyles>
         </LargeCard>
       )}
     </Centered>
