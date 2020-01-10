@@ -1,28 +1,24 @@
 import styled from 'styled-components';
 
-import {
-  codeBackgroundDarkBlue,
-  codeBorderMutedPurple,
-  mutedYellow,
-  mutedOrange
-} from 'helpers/colors';
+import { mutedOrangeRGB } from 'helpers/colors';
 
+import InlineCode from 'components/atoms/InlineCode';
 import MdHeader from 'components/atoms/MdHeader';
 import MdLink from 'components/atoms/MdLink';
-import MdCodeBlock from 'components/atoms/MdCodeBlock';
+import MdCodeBlock from 'components/molecules/MdCodeBlock';
 import MdBlockQuote from 'components/atoms/MdBlockQuote';
 
 const StyledHr = styled.hr`
-  color: ${mutedOrange};
-  width: 75%;
-`;
+  border: 0;
+  height: 0.3rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(${mutedOrangeRGB}, 0.75),
+    rgba(0, 0, 0, 0)
+  );
 
-const StyledInlineCode = styled.code`
-  color: ${mutedYellow};
-  background: ${codeBackgroundDarkBlue};
-  border: 0.2px ${codeBorderMutedPurple} solid;
-  border-radius: 0.2rem;
-  padding: 0 0.5rem 0 0.5rem;
+  width: 75%;
 `;
 
 export default location => ({
@@ -77,6 +73,6 @@ export default location => ({
     component: MdCodeBlock
   },
   code: {
-    component: StyledInlineCode
+    component: InlineCode
   }
 });
