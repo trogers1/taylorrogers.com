@@ -6,6 +6,7 @@ export const grayDark = '#6C6D6E';
 export const mutedBlue = '#237385';
 export const mutedDarkBlue = '#232D34';
 export const mutedOrange = '#C56651';
+export const mutedOrangeRGB = '197,102,81';
 export const mutedYellow = '#C87D20';
 export const mutedPink = '#b97195';
 export const pink = '#F0547D';
@@ -26,6 +27,7 @@ export default {
   mutedBlue,
   mutedDarkBlue,
   mutedOrange,
+  mutedOrangeRGB,
   mutedYellow,
   mutedPink,
   pink,
