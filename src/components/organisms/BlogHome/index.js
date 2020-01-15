@@ -32,7 +32,7 @@ const BlogHome = ({ location }) => {
       setIsLoading(false);
     }
     getPosts();
-  }, []);
+  }, [currBlogType]);
 
   return (
     <Centered>
