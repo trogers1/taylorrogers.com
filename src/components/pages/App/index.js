@@ -7,6 +7,7 @@ import GlobalHeader from 'components/atoms/GlobalHeader';
 import ScrollToTop from 'components/atoms/ScrollToTop';
 import PageViews from 'components/organisms/PageViews';
 import HomePage from 'components/pages/Home';
+import About from 'components/pages/About';
 import Blog from 'components/pages/Blog';
 
 const BodyWrapper = styled.div`
@@ -34,7 +35,7 @@ const App = () => {
             <Route path="/dev" component={Blog} />
             <Route path="/rpg" component={Blog} />
             <Route path="/essays" component={Blog} />
-            <Route exact path="/about" render={() => <div>Coming soon...</div>} />
+            <Route exact path="/about" render={About} />
             <Redirect to="/" />
           </Switch>
         </BodyWrapper>
