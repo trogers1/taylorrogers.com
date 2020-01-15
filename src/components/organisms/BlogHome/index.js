@@ -23,18 +23,21 @@ const Centered = styled.div`
 const BlogHome = ({ location }) => {
   let currBlogType = location.pathname.split('/')[1];
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function getPosts() {
-      let res = await fetch(`${config.blogApiUrl}/blog`, { method: 'GET' });
+      let res = await fetch(`${config.blogApiUrl}/blog?type=${currBlogType}`, { method: 'GET' });
       res = await res.json();
       setPosts(res.data);
+      setIsLoading(false);
     }
     getPosts();
-  }, []);
+  }, [currBlogType]);
 
   return (
     <Centered>
-      <HeadingLarge>{posts.length ? 'Welcome' : 'Loading'}</HeadingLarge>
+      {!isLoading && <HeadingLarge>{posts.length ? 'Welcome' : 'Coming soon...'}</HeadingLarge>}
+      {isLoading && <HeadingLarge>Loading...</HeadingLarge>}
       <StyledGrid>
         {posts.map(post => (
           <Card
