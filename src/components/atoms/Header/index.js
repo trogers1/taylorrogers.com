@@ -36,7 +36,7 @@ const StyledSpan = styled.span`
   }};
 `;
 
-const Header = ({ children, id, isLink, isMarkdown, location, headerType }) => {
+const Header = ({ children, id, isLink, isMarkdown, location, headerType, ...rest }) => {
   let Component;
   if (isLink) {
     Component = () => (
@@ -54,31 +54,31 @@ const Header = ({ children, id, isLink, isMarkdown, location, headerType }) => {
   switch (headerType) {
     case 'h2':
       return (
-        <h2>
+        <h2 {...rest}>
           <Component />
         </h2>
       );
     case 'h3':
       return (
-        <h3>
+        <h3 {...rest}>
           <Component />
         </h3>
       );
     case 'h4':
       return (
-        <h4>
+        <h4 {...rest}>
           <Component />
         </h4>
       );
     case 'h5':
       return (
-        <h5>
+        <h5 {...rest}>
           <Component />
         </h5>
       );
     case 'h6':
       return (
-        <h6>
+        <h6 {...rest}>
           <Component />
         </h6>
       );
