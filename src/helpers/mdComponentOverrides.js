@@ -1,25 +1,9 @@
-import styled from 'styled-components';
-
-import { mutedOrangeRGB } from 'helpers/colors';
-
 import InlineCode from 'components/atoms/InlineCode';
 import Header from 'components/atoms/Header';
-import MdLink from 'components/atoms/MdLink';
-import MdCodeBlock from 'components/molecules/MdCodeBlock';
 import MdBlockQuote from 'components/atoms/MdBlockQuote';
-
-const StyledHr = styled.hr`
-  border: 0;
-  height: 0.3rem;
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(${mutedOrangeRGB}, 0.75),
-    rgba(0, 0, 0, 0)
-  );
-
-  width: 75%;
-`;
+import MdLink from 'components/atoms/MdLink';
+import StyledHr from 'components/atoms/StyledHr';
+import MdCodeBlock from 'components/molecules/MdCodeBlock';
 
 export default location => ({
   a: {
