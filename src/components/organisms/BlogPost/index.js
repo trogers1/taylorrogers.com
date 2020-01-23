@@ -26,7 +26,7 @@ const UniversalMdStyles = styled(Markdown)`
 
 const BlogPage = ({ location }) => {
   const { hash } = location;
-  const overrides = getOverrides(location);
+  const mdComponentOverrides = getOverrides(location);
   const [article, setArticle] = useState('');
   let blogId = location.pathname;
   blogId = blogId.split('/')[2];
@@ -39,23 +39,14 @@ const BlogPage = ({ location }) => {
     getArticle();
   }, [blogId]);
 
-  // Scroll to hash, if present
-  useEffect(() => {
-    const id = hash.replace(/#/g, '');
-    if (hash && document.getElementById(id)) {
-      const scrollOffset = -60;
-      const element = document.getElementById(id);
-      const scrollTo = element.getBoundingClientRect().top + window.pageYOffset + scrollOffset;
-      window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-    }
-  }, [hash, article]); // Fires every time hash changes or article is loaded
-
   return (
     <Centered>
       <HeadingLarge>{article ? article.title : 'Loading...'}</HeadingLarge>
       {article && (
         <LargeCard>
-          <UniversalMdStyles options={{ overrides }}>{article.body}</UniversalMdStyles>
+          <UniversalMdStyles options={{ overrides: mdComponentOverrides }}>
+            {article.body}
+          </UniversalMdStyles>
         </LargeCard>
       )}
     </Centered>
