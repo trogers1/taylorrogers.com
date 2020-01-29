@@ -8,7 +8,6 @@ import slugify from 'helpers/slugify';
 import Face from 'images/face.jpg';
 
 import CircleImage from 'components/atoms/CircleImage';
-import Dropdown from 'components/atoms/Dropdown';
 import Select from 'components/atoms/Select';
 import Header from 'components/atoms/Header';
 import TabButton from 'components/atoms/TabButton';
@@ -159,11 +158,6 @@ const AboutPage = ({ location }) => {
                 >
                   Selected Skills and Proficiencies
                 </StyledHeader>
-                <Dropdown
-                  options={filterOptions}
-                  selectFunction={option => setFilter(option)}
-                  currentSelection={currFilter}
-                />
                 <Select
                   ariaLabel="Select Grouping of Skills to Display"
                   options={filterOptions}
