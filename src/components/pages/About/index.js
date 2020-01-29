@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 import aboutSkills from 'helpers/aboutSkills';
 import colors from 'helpers/colors';
+import slugify from 'helpers/slugify';
 
 import Face from 'images/face.jpg';
 
-import TabButton from 'components/atoms/TabButton';
 import CircleImage from 'components/atoms/CircleImage';
+import Dropdown from 'components/atoms/Dropdown';
+import Select from 'components/atoms/Select';
 import Header from 'components/atoms/Header';
+import TabButton from 'components/atoms/TabButton';
 import AnimatedBarChart from 'components/molecules/AnimatedBarChart';
 import Tabs from 'components/molecules/Tabs';
 
@@ -52,14 +55,41 @@ const TabContent = styled.div`
 
 const TabButtonWrapper = styled.div`
   all: unset;
-  background: ${colors.mutedDarkBlue}
+  background: ${colors.mutedDarkBlue};
   border: 0.1rem solid ${colors.mutedBlue};
   border-radius: 0.4rem;
   overflow: hidden;
 `;
 
+const StyledHeader = styled(Header)`
+  text-align: center;
+  width: 100%;
+`;
+
 const AboutPage = ({ location }) => {
   const [selectedTab, setSelectedTab] = useState('Developer');
+  const [currFilter, setFilter] = useState('Default');
+  const [displayedSkills, setDisplayedSkills] = useState([]);
+  const filterOptions = [
+    'Default',
+    'Frontend',
+    'Backend',
+    'DevOps',
+    'Data/System Engineering',
+    'Other',
+    'Soft Skills',
+    'All'
+  ];
+
+  useEffect(() => {
+    if (currFilter === 'All') {
+      setDisplayedSkills(aboutSkills);
+    } else {
+      setDisplayedSkills(
+        aboutSkills.filter(skill => skill.types.some(item => item === currFilter))
+      );
+    }
+  }, [currFilter]);
   return (
     <Tabs
       tabGroupId="About"
@@ -120,11 +150,35 @@ const AboutPage = ({ location }) => {
                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                   officia deserunt mollit anim id est laborum
                 </StyledParagraph>
+
+                <StyledHeader
+                  isLink
+                  headerType="h2"
+                  location={location}
+                  id={slugify('Selected Skills and Proficiencies')}
+                >
+                  Selected Skills and Proficiencies
+                </StyledHeader>
+                <Dropdown
+                  options={filterOptions}
+                  selectFunction={option => setFilter(option)}
+                  currentSelection={currFilter}
+                />
+                <Select
+                  ariaLabel="Select Grouping of Skills to Display"
+                  options={filterOptions}
+                  onChange={e => {
+                    setFilter(e.target.value);
+                    console.log('setting ', e.target.value);
+                  }}
+                  selection={currFilter}
+                  placeholder="Filter to a Grouping of Skills"
+                />
                 <AnimatedBarChart
-                  title="Selected Skills and Proficiencies"
-                  data={aboutSkills}
+                  data={displayedSkills}
                   maxPossible={100}
                   location={location}
+                  shouldAnimate={selectedTab === 'Developer'}
                 />
               </TabContent>
               <TabContent
