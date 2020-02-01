@@ -31,6 +31,7 @@ const StyledDiv = styled.header`
   top: 0;
   position: fixed;
   width: 100%;
+  z-index: 10;
   @media screen and (min-width: 800px) {
     font-size: 0.85rem;
     height: 6rem;
