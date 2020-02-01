@@ -75,13 +75,13 @@ const Select = ({
       {!disabled && !isLoading && <Caret src={DownCaret} alt="" aria-hidden />}
       {isLoading && <Loading src={LoadingGif} alt="loading options" />}
       <StyledSelect
-        required={required}
-        id={id}
-        onChange={onChange}
-        value={value}
         aria-label={ariaLabel}
         disabled={disabled}
+        id={id}
         name={name}
+        onChange={onChange}
+        required={required}
+        value={value}
       >
         {placeholder && (
           <StyledOption className="default" disabled>
