@@ -9,13 +9,13 @@ const BorderDiv = styled.div`
   background: ${colors.mutedDarkBlue};
   padding: ${props => {
     if (props.position === 'first') {
-      return '0 0.05rem 0 0';
+      return '0 0.1rem 0 0';
     }
     if (props.position === 'middle') {
-      return '0 0.05rem 0 0.05rem';
+      return '0 0.1rem 0 0.1rem';
     }
     if (props.position === 'last') {
-      return '0 0 0 0.05rem';
+      return '0 0 0 0.1rem';
     }
   }};
 `;
