@@ -55,7 +55,7 @@ const App = () => {
               <Route path="/dev" component={Blog} />
               <Route path="/rpg" component={Blog} />
               <Route path="/essays" component={Blog} />
-              <Route exact path="/about" render={() => <div>Coming soon...</div>} />
+              <Route exact path="/about" component={About} />
               {posts.map(post => (
                 <Route
                   key={post.id}
