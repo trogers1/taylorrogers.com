@@ -1,5 +1,6 @@
 // colors
 export const cardBackground = 'rgba(3, 3, 3, 0.25)';
+export const cardBackgroundRGB = '3, 3, 3';
 export const codeBackgroundDarkBlue = '#141c27';
 export const codeBorderMutedPurple = '#263449';
 export const mutedBlue = '#237385'; // External Links, HeadingLarge bottom border, Internal Links, a circle button
@@ -16,6 +17,7 @@ export const yellow = '#F0BA47'; // Circle button text
 
 export default {
   cardBackground,
+  cardBackgroundRGB,
   codeBackgroundDarkBlue,
   codeBorderMutedPurple,
   mutedBlue,
