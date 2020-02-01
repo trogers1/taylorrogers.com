@@ -87,15 +87,7 @@ export default [
   {
     name: 'Terraform',
     score: 87,
-    types: [
-      'Backend',
-      'Frontend',
-      'DevOps',
-      'Soft Skills',
-      'Data/System Engineering',
-      'Other',
-      'Default'
-    ]
+    types: ['DevOps', 'Data/System Engineering', 'Other', 'Default']
   },
   {
     name: 'NodeJS',
@@ -185,12 +177,12 @@ export default [
   {
     name: 'Web Development',
     score: 95,
-    types: ['Backend', 'Frontend', 'DevOps', 'Other']
+    types: ['Backend', 'Frontend', 'DevOps']
   },
   {
     name: 'Systems Engineering',
     score: 53,
-    types: ['Data/System Engineering', 'Other']
+    types: ['Data/System Engineering']
   },
   {
     name: 'Scripting',
@@ -260,7 +252,7 @@ export default [
   {
     name: 'Software Development',
     score: 80,
-    types: ['Backend', 'Frontend', 'DevOps', 'Other']
+    types: ['Backend', 'Frontend', 'Other']
   },
   {
     name: 'Software Engineering',
@@ -275,7 +267,7 @@ export default [
   {
     name: 'Python (Programming Language)',
     score: 75,
-    types: ['Backend', 'Data/System Engineering', 'Default']
+    types: ['Backend', 'Data/System Engineering', 'Other', 'Default']
   },
   {
     name: 'Web Services',
@@ -285,7 +277,7 @@ export default [
   {
     name: 'Object-Oriented Programming',
     score: 90,
-    types: ['Data/System Engineering', 'Other']
+    types: ['Frontend', 'Backend', 'Data/System Engineering', 'Other']
   },
   {
     name: 'Scalability',
