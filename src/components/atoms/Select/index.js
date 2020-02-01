@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { grayDark, mutedYellow, cardBackground, mutedBlue } from 'helpers/colors';
+import { mutedYellow, cardBackground, mutedBlue } from 'helpers/colors';
 import DownCaret from 'images/caret-yellow-down.svg';
 import LoadingGif from 'images/LoadingGif.gif';
 
