@@ -227,7 +227,7 @@ const AboutPage = ({ location }) => {
                   <StyledInput
                     placeholder="Search Skills"
                     value={searchInput}
-                    setValue={e => setSearchInput(e)}
+                    onChange={e => setSearchInput(e)}
                   />
                 </Flex>
                 <AnimatedBarChart

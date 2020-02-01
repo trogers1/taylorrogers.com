@@ -36,13 +36,13 @@ const Ex = styled.img`
   top: 0.8rem;
 `;
 
-const Input = ({ className, placeholder, setValue, value }) => {
+const Input = ({ className, placeholder, onChange, value }) => {
   return (
     <Wrapper className={className}>
-      {value && <Ex src={Close} alt="" aria-hidden onClick={() => setValue('')} />}
+      {value && <Ex src={Close} alt="" aria-hidden onClick={() => onChange('')} />}
       <StyledInput
         placeholder={placeholder}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         value={value}
       />
     </Wrapper>
@@ -51,8 +51,8 @@ const Input = ({ className, placeholder, setValue, value }) => {
 
 Input.propTypes = {
   className: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
   value: PropTypes.string
 };
 
