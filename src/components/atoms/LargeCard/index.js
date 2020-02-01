@@ -7,7 +7,7 @@ export default styled.div`
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   color: ${textGrey};
-  font-size: 1.6rem;
+  font-size: 2rem;
   height: auto;
   margin: 2rem;
   margin-bottom: 5rem;
@@ -18,6 +18,7 @@ export default styled.div`
   word-break: break-word;
 
   @media (max-width: 799px) {
+    font-size: 1.6rem;
     padding: 2rem 1rem;
     max-width: 100%;
     margin: 2rem 0.5rem;
