@@ -6,8 +6,8 @@ import DownCaret from 'images/caret-yellow-down.svg';
 import LoadingGif from 'images/LoadingGif.gif';
 
 const Wrapper = styled.div`
-  position: relative;
   display: inline-block;
+  position: relative;
   width: 100%;
 
   /* Prevent Edge from adding extra carets */
@@ -18,14 +18,14 @@ const Wrapper = styled.div`
 
 const StyledSelect = styled.select`
   appearance: none;
+  background: ${cardBackground};
+  border: none;
+  color: ${props => (!props.disabled ? mutedYellow : 'grey')};
+  cursor: ${props => (!props.disabled ? 'pointer' : 'not-allowed')};
+  font-size: 1.6rem;
   padding: 0.5rem 1rem;
   padding-right: 3rem;
-  cursor: ${props => (!props.disabled ? 'pointer' : 'not-allowed')};
-  background: ${cardBackground};
-  color: ${props => (!props.disabled ? mutedYellow : 'grey')};
   width: 100%;
-  border: none;
-  font-size: 1.6rem;
 
   @media screen and (max-width: 499px) {
     font-size: 1.6rem;
