@@ -14,7 +14,12 @@ const ScrollToTopOrHash = ({ location }) => {
 };
 
 ScrollToTopOrHash.propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+    hash: PropTypes.string.isRequired,
+    key: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default withRouter(ScrollToTopOrHash);
