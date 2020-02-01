@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import hljs from 'highlight.js/lib/highlight';
 import 'highlight.js/styles/atom-one-dark.css'; // import preferred style
 
 const registeredLanguages = {};
+
+const StyledPre = styled.pre`
+  font-size: 1.6rem;
+  line-height: 1.5;
+  > * {
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+`;
 
 export class CodeHighlight extends Component {
   constructor(props) {
@@ -59,11 +69,11 @@ export class CodeHighlight extends Component {
       return null; // or show a loader
     }
     return (
-      <pre>
+      <StyledPre>
         <code ref={this.codeNode} className={language}>
           {children}
         </code>
-      </pre>
+      </StyledPre>
     );
   }
 }
