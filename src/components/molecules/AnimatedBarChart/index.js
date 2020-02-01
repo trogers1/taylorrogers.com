@@ -1,42 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
 
 import colors from 'helpers/colors';
-import slugify from 'helpers/slugify';
 
-import Header from 'components/atoms/Header';
 import StyledHr from 'components/atoms/StyledHr';
-
-const StyledHeader = styled(Header)`
-  text-align: center;
-  width: 100%;
-`;
 
 const Centered = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 10%;
 `;
 
 const ChartWrapper = styled.div`
   all: unset;
-  margin-bottom: 10%;
   width: 70%;
 `;
 
+const AnimationStyles = styled.div`
+  /* This fires as soon as the element enters the DOM*/
+  .chart-bar-enter {
+    /*We give the list the initial dimension of the list button*/
+    width: 0;
+  }
+  /* This is where we can add the transition*/
+  .chart-bar-enter-active {
+    width: calc(${({ score, maxPossible }) => score / maxPossible} * 100%);
+    transition: width 2s;
+  }
+  .chart-bar-appear {
+    /*We give the list the initial dimension of the list button*/
+    width: 0;
+  }
+  /* This is where we can add the transition*/
+  .chart-bar-appear-active {
+    width: calc(${({ score, maxPossible }) => score / maxPossible} * 100%);
+    transition: width 2s;
+  }
+`;
+
 const BarLabel = styled.span`
-  position: absolute;
   color: ${colors.mutedYellow};
+  position: absolute;
+  @media (max-width: 799px) {
+    display: inline-block;
+    position: static;
+  }
 `;
 
 const Bar = styled.div`
   background: linear-gradient(270deg, ${colors.mutedBlue} 5%, rgb(${colors.mutedBlueRGB}, 0) 100%);
   height: 2rem;
   margin: 1rem;
-  width: calc(${({ score, maxPossible }) => score / maxPossible} * 100%);
+  padding-right: 1rem;
 
+  width: calc(${({ score, maxPossible }) => score / maxPossible} * 100%);
   :hover {
     background: linear-gradient(
       270deg,
@@ -56,38 +77,63 @@ const Bar = styled.div`
   }
 `;
 
-const AnimatedBarChart = ({ title, data, maxPossible, location }) => {
-  const [parsedData, setParsedData] = useState([]);
-  useEffect(() => {
-    console.log('arsed data', parsedData);
-    const newData = data.sort((a, b) => b.score - a.score);
-    setParsedData(newData);
-  }, [data]);
+const HiddenScore = styled.span`
+  color: ${colors.mutedDarkBlue};
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+`;
+
+const ErrorMessage = styled.div`
+  border: solid 0.2rem ${colors.mutedPink};
+  color: ${colors.textGrey};
+  font-style: italic;
+  padding: 1rem 2rem;
+`;
+
+const AnimatedBarChart = ({ data, maxPossible, shouldAnimate }) => {
+  const [hoverSkill, setHoverSkill] = useState(null);
   return (
     <Centered>
-      {location ? (
-        <StyledHeader isLink headerType="h2" location={location} id={slugify(title)}>
-          {title}
-        </StyledHeader>
-      ) : (
-        <StyledHeader headerType="h2">{title}</StyledHeader>
-      )}
-
       <StyledHr />
-      <ChartWrapper>
-        {parsedData.map(skill => (
-          <div key={skill.name}>
-            <BarLabel>{skill.name}</BarLabel>
-            <Bar score={skill.score} maxPossible={maxPossible} />
-          </div>
-        ))}
-      </ChartWrapper>
+      {!data.length && <ErrorMessage>Nothing to display...</ErrorMessage>}
+      {data.length ? (
+        <ChartWrapper>
+          {data.map(skill => (
+            <AnimationStyles key={skill.name} score={skill.score} maxPossible={maxPossible}>
+              <BarLabel>{skill.name}</BarLabel>
+              <CSSTransition
+                in={shouldAnimate}
+                timeout={5000}
+                classNames="chart-bar"
+                unmountOnExit
+                appear
+              >
+                <Bar
+                  score={skill.score}
+                  maxPossible={maxPossible}
+                  onMouseEnter={() => {
+                    if (hoverSkill !== skill.name) {
+                      setHoverSkill(skill.name);
+                    }
+                  }}
+                  onMouseLeave={() => setHoverSkill(null)}
+                >
+                  {hoverSkill === skill.name && (
+                    <HiddenScore>{`${skill.score}/${maxPossible}`}</HiddenScore>
+                  )}
+                </Bar>
+              </CSSTransition>
+            </AnimationStyles>
+          ))}
+        </ChartWrapper>
+      ) : null}
+      <StyledHr />
     </Centered>
   );
 };
 
 AnimatedBarChart.propTypes = {
-  title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -95,8 +141,8 @@ AnimatedBarChart.propTypes = {
       types: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
     })
   ),
-  location: PropTypes.object,
-  maxPossible: PropTypes.number.isRequired
+  maxPossible: PropTypes.number.isRequired,
+  shouldAnimate: PropTypes.bool.isRequired
 };
 
 export default AnimatedBarChart;
