@@ -7,23 +7,22 @@ import colors from 'helpers/colors';
 import Close from 'images/close.svg';
 
 const Wrapper = styled.div`
-  position: relative;
   display: inline-block;
+  position: relative;
   width: 100%;
 `;
 
 const StyledInput = styled.input`
-  display: inline-block;
-
-  padding: 0.5rem 1.5rem;
-  padding-right: 3rem;
-  cursor: ${props => (!props.disabled ? 'text' : 'not-allowed')};
   background: ${colors.cardBackground};
-  color: ${props => (!props.disabled ? colors.mutedYellow : 'grey')};
-  width: 100%;
   border: none;
   box-sizing: border-box;
+  color: ${props => (!props.disabled ? colors.mutedYellow : 'grey')};
+  cursor: ${props => (!props.disabled ? 'text' : 'not-allowed')};
+  display: inline-block;
   font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+  padding-right: 3rem;
+  width: 100%;
 
   @media screen and (max-width: 499px) {
     font-size: 1.6rem;
