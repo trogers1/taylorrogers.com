@@ -18,15 +18,14 @@ const Wrapper = styled.div`
 
 const StyledSelect = styled.select`
   appearance: none;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   padding-right: 3rem;
   cursor: ${props => (!props.disabled ? 'pointer' : 'not-allowed')};
   background: ${cardBackground};
   color: ${props => (!props.disabled ? mutedYellow : 'grey')};
   width: 100%;
-  border-radius: 3px;
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 
   @media screen and (max-width: 499px) {
     font-size: 1.6rem;
@@ -45,7 +44,7 @@ const StyledOption = styled.option`
 const Caret = styled.img`
   position: absolute;
   right: 1.4rem;
-  top: 1.6rem;
+  top: 1.2rem;
 `;
 
 const Loading = styled.img`
@@ -72,9 +71,9 @@ const Select = ({
   const value = selectedValue || placeholder;
 
   return (
-    <Wrapper data-item className={className}>
+    <Wrapper className={className}>
       {!disabled && !isLoading && <Caret src={DownCaret} alt="" aria-hidden />}
-      {isLoading && <Loading data-cy="spinner" src={LoadingGif} alt="loading options" />}
+      {isLoading && <Loading src={LoadingGif} alt="loading options" />}
       <StyledSelect
         required={required}
         id={id}
@@ -111,6 +110,7 @@ Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   placeholder: PropTypes.string,
+  required: PropTypes.bool,
   selection: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
