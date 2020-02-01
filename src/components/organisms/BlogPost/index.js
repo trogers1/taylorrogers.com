@@ -19,13 +19,13 @@ const Centered = styled.div`
 
 const UniversalMdStyles = styled(Markdown)`
   > * {
+    line-height: 2;
     margin-top: 4rem;
     margin-bottom: 4rem;
   }
 `;
 
 const BlogPage = ({ location }) => {
-  const { hash } = location;
   const mdComponentOverrides = getOverrides(location);
   const [article, setArticle] = useState('');
   let blogId = location.pathname;
