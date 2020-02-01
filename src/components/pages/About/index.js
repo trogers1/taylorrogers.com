@@ -225,6 +225,7 @@ const AboutPage = ({ location }) => {
                     placeholder="Filter to a Grouping of Skills"
                   />
                   <StyledInput
+                    ariaLabel="Search for Skills to Display"
                     placeholder="Search Skills"
                     value={searchInput}
                     onChange={e => setSearchInput(e)}

@@ -36,13 +36,16 @@ const Ex = styled.img`
   top: 0.8rem;
 `;
 
-const Input = ({ className, placeholder, onChange, value }) => {
+const Input = ({ ariaLabel = '', className, disabled, placeholder, onChange, required, value }) => {
   return (
     <Wrapper className={className}>
       {value && <Ex src={Close} alt="" aria-hidden onClick={() => onChange('')} />}
       <StyledInput
-        placeholder={placeholder}
+        aria-label={ariaLabel}
+        disabled={disabled}
         onChange={e => onChange(e.target.value)}
+        placeholder={placeholder}
+        required={required}
         value={value}
       />
     </Wrapper>
@@ -50,9 +53,12 @@ const Input = ({ className, placeholder, onChange, value }) => {
 };
 
 Input.propTypes = {
+  ariaLabel: PropTypes.string,
   className: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   value: PropTypes.string
 };
 
