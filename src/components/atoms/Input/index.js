@@ -20,6 +20,7 @@ const StyledInput = styled.input`
   cursor: ${props => (!props.disabled ? 'text' : 'not-allowed')};
   display: inline-block;
   font-size: 1.6rem;
+  ${props => (props.value ? '' : 'font-style: italic;')}
   padding: 0.5rem 1.5rem;
   padding-right: 3rem;
   width: 100%;
@@ -35,7 +36,7 @@ const Ex = styled.img`
   top: 0.8rem;
 `;
 
-const Input = ({ value, placeholder, setValue, className }) => {
+const Input = ({ className, placeholder, setValue, value }) => {
   return (
     <Wrapper className={className}>
       {value && <Ex src={Close} alt="" aria-hidden onClick={() => setValue('')} />}
@@ -49,9 +50,10 @@ const Input = ({ value, placeholder, setValue, className }) => {
 };
 
 Input.propTypes = {
-  value: PropTypes.string,
+  className: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired
+  setValue: PropTypes.func.isRequired,
+  value: PropTypes.string
 };
 
 export default Input;
