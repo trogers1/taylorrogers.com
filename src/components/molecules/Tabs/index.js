@@ -66,7 +66,6 @@ const Tabs = ({ tabGroupId, children, onChange }) => {
       onClick: () => onChange(currTab.tabName),
       role: 'tab',
       tabIndex: currTab.isActive ? '0' : '-1',
-      'data-cy': `tab-${currTab.id}`,
       onKeyDown: e => cycleTabs(e)
     };
   };
@@ -85,8 +84,7 @@ const Tabs = ({ tabGroupId, children, onChange }) => {
       hidden: !currTab.isActive,
       id: `panel-${currTab.id}`,
       role: 'tabpanel',
-      tabIndex: currTab.isActive ? '0' : '-1',
-      'data-cy': `panel-${currTab.id}`
+      tabIndex: currTab.isActive ? '0' : '-1'
     };
   };
 
