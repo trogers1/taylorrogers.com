@@ -8,25 +8,19 @@ const StyledA = styled.a`
   color: ${mutedBlue};
 `;
 
-const ExternalLink = ({ url, children, ...other }) => {
+const ExternalLink = ({ children, url, ...other }) => {
+  // Checks if given link starts with http(s):// and appends it if not
+  const fullUrl = /^(https?:\/\/)|(mailto:)/i.test(url) ? url : `http://${url}`;
   return (
-    <StyledA
-      {...other}
-      href={
-        // Checks if given link starts with http(s):// and appends it if not
-        /^https?:\/\//i.test(url) ? url : `http://${url}`
-      }
-      rel="noopener noreferrer"
-      target="_blank"
-    >
+    <StyledA {...other} href={fullUrl} rel="noopener noreferrer" target="_blank">
       {children}
     </StyledA>
   );
 };
 
 ExternalLink.propTypes = {
-  url: PropTypes.string,
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  url: PropTypes.string
 };
 
 export default ExternalLink;

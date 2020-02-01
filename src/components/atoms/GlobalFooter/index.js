@@ -36,6 +36,7 @@ const LeftItems = styled.div`
   flex-direction: column;
   margin: 0;
   width: 100%;
+  z-index: 10;
 
   @media (min-width: 800px) {
     flex-direction: row;

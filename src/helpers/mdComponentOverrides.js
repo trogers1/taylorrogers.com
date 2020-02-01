@@ -1,25 +1,9 @@
-import styled from 'styled-components';
-
-import { mutedOrangeRGB } from 'helpers/colors';
-
 import InlineCode from 'components/atoms/InlineCode';
-import MdHeader from 'components/atoms/MdHeader';
-import MdLink from 'components/atoms/MdLink';
-import MdCodeBlock from 'components/molecules/MdCodeBlock';
+import Header from 'components/atoms/Header';
 import MdBlockQuote from 'components/atoms/MdBlockQuote';
-
-const StyledHr = styled.hr`
-  border: 0;
-  height: 0.3rem;
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0),
-    rgba(${mutedOrangeRGB}, 0.75),
-    rgba(0, 0, 0, 0)
-  );
-
-  width: 75%;
-`;
+import MdLink from 'components/atoms/MdLink';
+import StyledHr from 'components/atoms/StyledHr';
+import MdCodeBlock from 'components/molecules/MdCodeBlock';
 
 export default location => ({
   a: {
@@ -32,38 +16,48 @@ export default location => ({
     component: MdBlockQuote
   },
   h2: {
-    component: MdHeader,
+    component: Header,
     props: {
       location,
-      headerType: 'h2'
+      headerType: 'h2',
+      isLink: true,
+      isMarkdown: true
     }
   },
   h3: {
-    component: MdHeader,
+    component: Header,
     props: {
       location,
-      headerType: 'h3'
+      headerType: 'h3',
+      isLink: true,
+      isMarkdown: true
     }
   },
   h4: {
-    component: MdHeader,
+    component: Header,
     props: {
       location,
-      headerType: 'h4'
+      headerType: 'h4',
+      isLink: true,
+      isMarkdown: true
     }
   },
   h5: {
-    component: MdHeader,
+    component: Header,
     props: {
       location,
-      headerType: 'h5'
+      headerType: 'h5',
+      isLink: true,
+      isMarkdown: true
     }
   },
   h6: {
-    component: MdHeader,
+    component: Header,
     props: {
       location,
-      headerType: 'h6'
+      headerType: 'h6',
+      isLink: true,
+      isMarkdown: true
     }
   },
   hr: {
