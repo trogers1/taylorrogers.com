@@ -22,8 +22,9 @@ export class CodeHighlight extends Component {
     this.state = {
       loaded: false,
       translations: {
-        yml: 'yaml',
-        terraform: 'javascript' // Since highlight.js doesn't support terraform
+        js: 'javascript',
+        terraform: 'javascript', // Since highlight.js doesn't support terraform
+        yml: 'yaml'
       }
     };
     // create a ref to highlight only the rendered node and not fetch all the DOM
