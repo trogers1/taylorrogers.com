@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "REACT_APP_ENV=LOCAL next start",
+    "dev": "REACT_APP_ENV=LOCAL next dev",
     "build": "REACT_APP_ENV=LOCAL next build",
     "build:qa": "REACT_APP_ENV=QA next build",
     "build:prod": "REACT_APP_ENV=PROD next build",
