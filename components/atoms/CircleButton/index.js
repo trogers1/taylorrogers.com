@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import colors from 'helpers/colors';
 
-const Circle = styled(Link)`
+const Circle = styled.a`
   background: ${props => props.color || colors.mutedOrange};
   border-radius: 50%;
   color: ${colors.yellow};
@@ -28,10 +28,12 @@ const FlexContainer = styled.div`
   text-align: center;
 `;
 
-export default ({ children, to, color, ...rest }) => {
+export default ({ children, href, color, ...rest }) => {
   return (
-    <Circle color={color} to={to}>
-      <FlexContainer>{children}</FlexContainer>
-    </Circle>
+    <Link href={href}>
+      <Circle color={color}>
+        <FlexContainer>{children}</FlexContainer>
+      </Circle>
+    </Link>
   );
 };
