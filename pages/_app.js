@@ -1,5 +1,5 @@
 import React from 'react';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 
 const GlobalStyles = ({ children }) => (
   <>
@@ -37,11 +37,9 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <GlobalStyles>
-          <Component {...pageProps} />
-        </GlobalStyles>
-      </Container>
+      <GlobalStyles>
+        <Component {...pageProps} />
+      </GlobalStyles>
     );
   }
 }
