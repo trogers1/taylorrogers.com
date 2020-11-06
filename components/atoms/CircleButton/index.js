@@ -28,7 +28,7 @@ const FlexContainer = styled.div`
   text-align: center;
 `;
 
-export default ({ children, href, color, ...rest }) => {
+const CircleButton = ({ children, href, color, ...rest }) => {
   return (
     <Link href={href}>
       <Circle color={color}>
@@ -37,3 +37,5 @@ export default ({ children, href, color, ...rest }) => {
     </Link>
   );
 };
+
+export default CircleButton;
