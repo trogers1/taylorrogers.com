@@ -15,7 +15,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
     "react-transition-group": "^4.3.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "REACT_APP_ENV=LOCAL next start",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "axe-core": "^3.3.1",
+    "babel-plugin-styled-components": "^1.11.1",
     "cypress": "^3.4.1",
     "cypress-axe": "^0.5.1",
     "eslint-plugin-react": "^7.14.3",
