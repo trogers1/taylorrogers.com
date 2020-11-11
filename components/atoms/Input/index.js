@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 import colors from 'helpers/colors';
 
-import Close from 'images/close.svg';
-
 const Wrapper = styled.div`
   display: inline-block;
   position: relative;
@@ -39,7 +37,7 @@ const Ex = styled.img`
 const Input = ({ ariaLabel = '', className, disabled, placeholder, onChange, required, value }) => {
   return (
     <Wrapper className={className}>
-      {value && <Ex src={Close} alt="" aria-hidden onClick={() => onChange('')} />}
+      {value && <Ex src="/close-old.svg" alt="" aria-hidden onClick={() => onChange('')} />}
       <StyledInput
         aria-label={ariaLabel}
         disabled={disabled}
