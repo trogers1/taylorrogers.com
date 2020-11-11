@@ -6,7 +6,7 @@ import CircleButton from 'components/atoms/CircleButton';
 import EightiesLogo from 'public/80sLogo.svg';
 import TypewriterLogo from 'public/typewriterLogo_Full.svg';
 
-import { mutedBlue, mutedPink, mutedOrange, codeBorderMutedPurple } from '../helpers/colors';
+import { mutedBlue, mutedPink, mutedOrange } from '../helpers/colors';
 
 const isDarkTheme = () => Math.round(Math.random() * 1000) % 2 === 1;
 
