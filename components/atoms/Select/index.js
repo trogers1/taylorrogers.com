@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { mutedYellow, cardBackground, mutedBlue } from 'helpers/colors';
-import DownCaret from 'images/caret-yellow-down.svg';
-import LoadingGif from 'images/LoadingGif.gif';
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -73,7 +71,7 @@ const Select = ({
   return (
     <Wrapper className={className}>
       {!disabled && !isLoading && <Caret src={DownCaret} alt="" aria-hidden />}
-      {isLoading && <Loading src={LoadingGif} alt="loading options" />}
+      {isLoading && <Loading src="/LoadingGif.gif" alt="loading options" />}
       <StyledSelect
         aria-label={ariaLabel}
         disabled={disabled}
