@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
+import { useRouter } from 'next/router';
 import aboutSkills from 'helpers/aboutSkills';
 import colors from 'helpers/colors';
 import slugify from 'helpers/slugify';
-
-import Face from 'images/face.jpg';
 
 import CircleImage from 'components/atoms/CircleImage';
 import ExternalLink from 'components/atoms/ExternalLink';
@@ -30,6 +28,7 @@ const Centered = styled.div`
 
 const StyledImg = styled.img`
   height: 134%;
+  width: auto;
   margin-top: -4rem;
 `;
 
@@ -104,7 +103,8 @@ const StyledInput = styled(Input)`
   }
 `;
 
-const AboutPage = ({ location }) => {
+const AboutPage = () => {
+  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState('Developer');
 
   // Filter variables
@@ -154,9 +154,9 @@ const AboutPage = ({ location }) => {
       {({ getTabProps, getTabPanelProps }) => (
         <Centered>
           <CircleImage>
-            <StyledImg src={Face} alt="Image of Taylor Rogers' smiling face." />
+            <StyledImg src="/face.jpg" alt="Image of Taylor Rogers' smiling face." />
           </CircleImage>
-          <Header isLink headerType="h2" location={location} id="about-taylor">
+          <Header isLink headerType="h2" router={router} id="about-taylor">
             About Taylor, the&hellip;
           </Header>
           <>
@@ -211,7 +211,7 @@ const AboutPage = ({ location }) => {
                 <StyledHeader
                   isLink
                   headerType="h2"
-                  location={location}
+                  router={router}
                   id={slugify('Selected Skills and Proficiencies')}
                 >
                   Selected Skills and Proficiencies
@@ -234,7 +234,7 @@ const AboutPage = ({ location }) => {
                 <AnimatedBarChart
                   data={searchInput ? searchResults : filteredSkills}
                   maxPossible={100}
-                  location={location}
+                  router={router}
                   shouldAnimate={selectedTab === 'Developer'}
                 />
               </TabContent>
