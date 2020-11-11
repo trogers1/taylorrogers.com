@@ -36,11 +36,11 @@ const StyledSpan = styled.span`
   }};
 `;
 
-const Header = ({ children, id, isLink, isMarkdown, location, headerType, ...rest }) => {
+const Header = ({ children, id, isLink, isMarkdown, router, headerType, ...rest }) => {
   let Component;
   if (isLink) {
     Component = () => (
-      <StyledLink id={id} to={`${location.pathname}#${id}`}>
+      <StyledLink id={id} to={`${router.pathname}#${id}`}>
         {!isMarkdown ? <StyledSpan>{children}</StyledSpan> : children}
       </StyledLink>
     );
