@@ -70,7 +70,7 @@ const Select = ({
 
   return (
     <Wrapper className={className}>
-      {!disabled && !isLoading && <Caret src={DownCaret} alt="" aria-hidden />}
+      {!disabled && !isLoading && <Caret src="/caret-yellow-down.svg" alt="" aria-hidden />}
       {isLoading && <Loading src="/LoadingGif.gif" alt="loading options" />}
       <StyledSelect
         aria-label={ariaLabel}
