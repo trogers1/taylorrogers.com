@@ -1,5 +1,6 @@
 import React from 'react';
 import App from 'next/app';
+import PageViews from 'components/organisms/PageViews';
 
 const GlobalStyles = ({ children }) => (
   <>
@@ -38,6 +39,7 @@ class MyApp extends App {
 
     return (
       <GlobalStyles>
+        <PageViews />
         <Component {...pageProps} />
       </GlobalStyles>
     );

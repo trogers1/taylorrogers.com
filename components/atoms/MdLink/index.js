@@ -1,19 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-import { mutedBlue } from 'helpers/colors';
+import Link from 'next/link';
 
 import ExternalLink from 'components/atoms/ExternalLink';
+import InternalLink from 'components/atoms/InternalLink';
 
-const StyledLink = styled(Link)`
-  color: ${mutedBlue};
-`;
-
-export default ({ children, location, href }) => {
+const MdLink = ({ children, router, href }) => {
   if (href.startsWith('#')) {
-    return <StyledLink to={`${location.pathname}${href}`}>{children}</StyledLink>;
+    return <InternalLink href={`${router.pathname}${href}`}>{children}</InternalLink>;
   } else {
-    return <ExternalLink url={href}>{children}</ExternalLink>;
+    return <ExternalLink href={href}>{children}</ExternalLink>;
   }
 };
+
+export default MdLink;

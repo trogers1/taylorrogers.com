@@ -44,7 +44,7 @@ const BlogHome = ({ location }) => {
             key={post.id}
             title={post.attributes.title}
             previewText={post.attributes.previewText}
-            to={`/${currBlogType}/${post.id}`}
+            href={`/${currBlogType}/${post.id}`}
           />
         ))}
       </StyledGrid>

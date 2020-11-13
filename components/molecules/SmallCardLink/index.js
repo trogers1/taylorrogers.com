@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { cardBackground, mutedYellow, textGrey } from 'helpers/colors';
 
-const Card = styled(Link)`
+const Card = styled.a`
   background: ${cardBackground};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -32,9 +32,13 @@ const CardBody = styled.div`
   overflow-y: hidden;
 `;
 
-export default ({ title, previewText, to }) => (
-  <Card to={to}>
-    <CardTitle>{title}</CardTitle>
-    <CardBody>{previewText}</CardBody>
-  </Card>
+const SmallCardLink = ({ title, previewText, href }) => (
+  <Link href={href}>
+    <Card>
+      <CardTitle>{title}</CardTitle>
+      <CardBody>{previewText}</CardBody>
+    </Card>
+  </Link>
 );
+
+export default SmallCardLink;

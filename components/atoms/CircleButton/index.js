@@ -31,7 +31,7 @@ const FlexContainer = styled.div`
 const CircleButton = ({ children, href, color, ...rest }) => {
   return (
     <Link href={href}>
-      <Circle color={color}>
+      <Circle color={color} {...rest}>
         <FlexContainer>{children}</FlexContainer>
       </Circle>
     </Link>

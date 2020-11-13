@@ -16,16 +16,16 @@ const Centered = styled.div`
 const HomePage = () => {
   return (
     <Centered>
-      <CircleButton color={mutedBlue} to="/dev">
+      <CircleButton color={mutedBlue} href="/dev">
         Developer Tutorials
       </CircleButton>
-      <CircleButton color={codeBorderMutedPurple} to="/rpg">
+      <CircleButton color={codeBorderMutedPurple} href="/rpg">
         RPG Blog
       </CircleButton>
-      <CircleButton color={mutedPink} to="/essays">
+      <CircleButton color={mutedPink} href="/essays">
         Essays and Other Writings
       </CircleButton>
-      <CircleButton color={mutedOrange} to="/about">
+      <CircleButton color={mutedOrange} href="/about">
         About
       </CircleButton>
     </Centered>

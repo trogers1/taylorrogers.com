@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import aboutSkills from 'helpers/aboutSkills';
 import colors from 'helpers/colors';
@@ -152,143 +153,149 @@ const AboutPage = () => {
       }}
     >
       {({ getTabProps, getTabPanelProps }) => (
-        <Centered>
-          <CircleImage>
-            <StyledImg src="/face.jpg" alt="Image of Taylor Rogers' smiling face." />
-          </CircleImage>
-          <Header isLink headerType="h2" router={router} id="about-taylor">
-            About Taylor, the&hellip;
-          </Header>
-          <>
-            <TabButtonWrapper>
-              <TabButton
-                position="first"
-                isActive={selectedTab === 'Developer'}
-                {...getTabProps('Developer', selectedTab)}
-              >
-                Developer
-              </TabButton>
-              <TabButton
-                position="middle"
-                isActive={selectedTab === 'Writer'}
-                {...getTabProps('Writer', selectedTab)}
-              >
-                Writer
-              </TabButton>
-              <TabButton
-                position="last"
-                isActive={selectedTab === 'Person'}
-                {...getTabProps('Person', selectedTab)}
-              >
-                Person
-              </TabButton>
-            </TabButtonWrapper>
-            <div>
-              <TabContent
-                {...getTabPanelProps('Developer')}
-                className={selectedTab === 'Developer' ? 'Visible' : 'Invisible'}
-              >
-                <StyledParagraph>
-                  Hey there! Thanks for checking out my site. I am a developer with over 3 years and
-                  thousands of hours of professional software development experience. I am driven
-                  and have a passion for solving difficult problems.
-                </StyledParagraph>
-                <StyledParagraph>
-                  I&apos;m a Software Engineer at{' '}
-                  <ExternalLink url="economicmodeling.com">Emsi</ExternalLink>, an economic modeling
-                  firm specializing in labor market analytics. I excel at interpersonal
-                  communication, and pride myself in being a leader, a problem solver, and
-                  self-motivator.
-                </StyledParagraph>
-                <StyledParagraph>
-                  I love DevOps, APIs, the design and implementation of algorithms, software design
-                  patterns (such as SOLID), and have a passion for clean, well-documented, and
-                  well-tested code. Feel free to{' '}
-                  <ExternalLink url="mailto:taylorrogers@outlook.com">contact me</ExternalLink>{' '}
-                  should you have any questions or comments.
-                </StyledParagraph>
-
-                <StyledHeader
-                  isLink
-                  headerType="h2"
-                  router={router}
-                  id={slugify('Selected Skills and Proficiencies')}
+        <>
+          <Head>
+            <title>About Taylor Rogers</title>
+            <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+          </Head>
+          <Centered>
+            <CircleImage>
+              <StyledImg src="/face.jpg" alt="Image of Taylor Rogers' smiling face." />
+            </CircleImage>
+            <Header isLink headerType="h2" id="about-taylor">
+              About Taylor, the&hellip;
+            </Header>
+            <>
+              <TabButtonWrapper>
+                <TabButton
+                  position="first"
+                  isActive={selectedTab === 'Developer'}
+                  {...getTabProps('Developer', selectedTab)}
                 >
-                  Selected Skills and Proficiencies
-                </StyledHeader>
-                <Flex>
-                  <StyledSelect
-                    ariaLabel="Select Grouping of Skills to Display"
-                    options={filterOptions}
-                    onChange={e => setFilter(e.target.value)}
-                    selection={currFilter}
-                    placeholder="Filter to a Grouping of Skills"
+                  Developer
+                </TabButton>
+                <TabButton
+                  position="middle"
+                  isActive={selectedTab === 'Writer'}
+                  {...getTabProps('Writer', selectedTab)}
+                >
+                  Writer
+                </TabButton>
+                <TabButton
+                  position="last"
+                  isActive={selectedTab === 'Person'}
+                  {...getTabProps('Person', selectedTab)}
+                >
+                  Person
+                </TabButton>
+              </TabButtonWrapper>
+              <div>
+                <TabContent
+                  {...getTabPanelProps('Developer')}
+                  className={selectedTab === 'Developer' ? 'Visible' : 'Invisible'}
+                >
+                  <StyledParagraph>
+                    Hey there! Thanks for checking out my site. I am a developer with over 3 years
+                    and thousands of hours of professional software development experience. I am
+                    driven and have a passion for solving difficult problems.
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    I&apos;m a Software Engineer at{' '}
+                    <ExternalLink href="economicmodeling.com">Emsi</ExternalLink>, an economic
+                    modeling firm specializing in labor market analytics. I excel at interpersonal
+                    communication, and pride myself in being a leader, a problem solver, and
+                    self-motivator.
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    I love DevOps, APIs, the design and implementation of algorithms, software
+                    design patterns (such as SOLID), and have a passion for clean, well-documented,
+                    and well-tested code. Feel free to{' '}
+                    <ExternalLink href="mailto:taylorrogers@outlook.com">contact me</ExternalLink>{' '}
+                    should you have any questions or comments.
+                  </StyledParagraph>
+
+                  <StyledHeader
+                    isLink
+                    headerType="h2"
+                    router={router}
+                    id={slugify('Selected Skills and Proficiencies')}
+                  >
+                    Selected Skills and Proficiencies
+                  </StyledHeader>
+                  <Flex>
+                    <StyledSelect
+                      ariaLabel="Select Grouping of Skills to Display"
+                      options={filterOptions}
+                      onChange={e => setFilter(e.target.value)}
+                      selection={currFilter}
+                      placeholder="Filter to a Grouping of Skills"
+                    />
+                    <StyledInput
+                      ariaLabel="Search for Skills to Display"
+                      placeholder="Search Skills"
+                      value={searchInput}
+                      onChange={e => setSearchInput(e)}
+                    />
+                  </Flex>
+                  <AnimatedBarChart
+                    data={searchInput ? searchResults : filteredSkills}
+                    maxPossible={100}
+                    router={router}
+                    shouldAnimate={selectedTab === 'Developer'}
                   />
-                  <StyledInput
-                    ariaLabel="Search for Skills to Display"
-                    placeholder="Search Skills"
-                    value={searchInput}
-                    onChange={e => setSearchInput(e)}
-                  />
-                </Flex>
-                <AnimatedBarChart
-                  data={searchInput ? searchResults : filteredSkills}
-                  maxPossible={100}
-                  router={router}
-                  shouldAnimate={selectedTab === 'Developer'}
-                />
-              </TabContent>
-              <TabContent
-                {...getTabPanelProps('Writer')}
-                className={selectedTab === 'Writer' ? 'Visible' : 'Invisible'}
-              >
-                <StyledParagraph>
-                  As a writer, I&apos;m a long&#8208;time hobby&#8208;ist who just enjoys it as a
-                  creative output for expressing myself. I am a serial note&#8208;taker and have
-                  taken to putting my notes about development online in the hopes that the notes I
-                  have written for myself can be useful to others. You can check out my{' '}
-                  <InternalLink to="/dev">Developer Notes and Tutorials</InternalLink> for more on
-                  that.
-                </StyledParagraph>
-                <StyledParagraph>
-                  For more creative things, I enjoy writing fantasy fiction as a hobby (you know,
-                  like a nerd), as well as some poetry and music when I make the time. I also write
-                  and world&#8208;build quite a bit regarding my own fantasy world, &quot;Greater
-                  Ecumene&quot;, some of which I hope to eventually put on this site. I&apos;ve also
-                  been known to write non-fiction personal essays from time&#8208;to&#8208;time.
-                  Selected ones can be found on the{' '}
-                  <InternalLink to="/essays">
-                    section of my site devoted to such things.
-                  </InternalLink>
-                </StyledParagraph>
-              </TabContent>
-              <TabContent
-                {...getTabPanelProps('Person')}
-                className={selectedTab === 'Person' ? 'Visible' : 'Invisible'}
-              >
-                <StyledParagraph>
-                  As a person, I am a great lover of the outdoors and life&#8208;long devotee to
-                  self&#8208;improvement. I have previously been a professional whitewater rafting
-                  guide, and have taken that passion through the rest of my life, including rowing
-                  my own boat down the Grand Canyon in 2018. When outside, I&apos;d love to be doing
-                  the above, as well as rock climbing, whitewater kayaking, cross&#8208;country
-                  skiing, trail running, surfing, sailing, etc.
-                </StyledParagraph>
-                <StyledParagraph>
-                  I&apos;m also a big believer in constant self improvement, both physically and
-                  mentally. I am always looking to grow and better myself as a person, so you can
-                  often find my trying something new and unfamiliar (and failing, often, in the
-                  process).
-                </StyledParagraph>
-                <StyledParagraph>
-                  I also happen to be married to the most amazing, beautiful, and talented woman in
-                  the entire world (proof available upon request), with whom I spend most of my free
-                  time, along with our two dogs Ricochet and Rosie.
-                </StyledParagraph>
-              </TabContent>
-            </div>
-          </>
-        </Centered>
+                </TabContent>
+                <TabContent
+                  {...getTabPanelProps('Writer')}
+                  className={selectedTab === 'Writer' ? 'Visible' : 'Invisible'}
+                >
+                  <StyledParagraph>
+                    As a writer, I&apos;m a long&#8208;time hobby&#8208;ist who just enjoys it as a
+                    creative output for expressing myself. I am a serial note&#8208;taker and have
+                    taken to putting my notes about development online in the hopes that the notes I
+                    have written for myself can be useful to others. You can check out my{' '}
+                    <InternalLink href="/dev">Developer Notes and Tutorials</InternalLink> for more
+                    on that.
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    For more creative things, I enjoy writing fantasy fiction as a hobby (you know,
+                    like a nerd), as well as some poetry and music when I make the time. I also
+                    write and world&#8208;build quite a bit regarding my own fantasy world,
+                    &quot;Greater Ecumene&quot;, some of which I hope to eventually put on this
+                    site. I&apos;ve also been known to write non-fiction personal essays from
+                    time&#8208;to&#8208;time. Selected ones can be found on the{' '}
+                    <InternalLink href="/essays">
+                      section of my site devoted to such things.
+                    </InternalLink>
+                  </StyledParagraph>
+                </TabContent>
+                <TabContent
+                  {...getTabPanelProps('Person')}
+                  className={selectedTab === 'Person' ? 'Visible' : 'Invisible'}
+                >
+                  <StyledParagraph>
+                    As a person, I am a great lover of the outdoors and life&#8208;long devotee to
+                    self&#8208;improvement. I have previously been a professional whitewater rafting
+                    guide, and have taken that passion through the rest of my life, including rowing
+                    my own boat down the Grand Canyon in 2018. When outside, I&apos;d love to be
+                    doing the above, as well as rock climbing, whitewater kayaking,
+                    cross&#8208;country skiing, trail running, surfing, sailing, etc.
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    I&apos;m also a big believer in constant self improvement, both physically and
+                    mentally. I am always looking to grow and better myself as a person, so you can
+                    often find my trying something new and unfamiliar (and failing, often, in the
+                    process).
+                  </StyledParagraph>
+                  <StyledParagraph>
+                    I also happen to be married to the most amazing, beautiful, and talented woman
+                    in the entire world (proof available upon request), with whom I spend most of my
+                    free time, along with our two dogs Ricochet and Rosie.
+                  </StyledParagraph>
+                </TabContent>
+              </div>
+            </>
+          </Centered>
+        </>
       )}
     </Tabs>
   );

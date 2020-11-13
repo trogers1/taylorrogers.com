@@ -24,7 +24,7 @@ const HomePage = () => {
     <Centered>
       <HeadingLarge>Not Found</HeadingLarge>
       Uh oh! The page you are looking for was not found.
-      <InternalLink to="/">Go to the Home Page</InternalLink>
+      <InternalLink href="/">Go to the Home Page</InternalLink>
     </Centered>
   );
 };

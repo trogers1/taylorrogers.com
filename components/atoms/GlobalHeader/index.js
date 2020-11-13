@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { mutedYellow, siteBackground } from 'helpers/colors';
 
-const HeaderText = styled(Link)`
+const HeaderText = styled.a`
   color: ${mutedYellow};
   font-size: 3rem;
   font-weight: 900;
@@ -55,9 +55,9 @@ const GlobalHeader = () => {
 
   return (
     <StyledDiv {...headerStyles}>
-      <HeaderText aria-label="Taylor-Rogers.com" to="/">
-        Taylor-Rogers.com
-      </HeaderText>
+      <Link href="/">
+        <HeaderText aria-label="Taylor-Rogers.com">Taylor-Rogers.com</HeaderText>
+      </Link>
     </StyledDiv>
   );
 };

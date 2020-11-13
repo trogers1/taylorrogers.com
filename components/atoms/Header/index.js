@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
 import colors from 'helpers/colors';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   all: unset;
   color: ${colors.mutedOrange};
   :hover {
@@ -36,13 +37,18 @@ const StyledSpan = styled.span`
   }};
 `;
 
-const Header = ({ children, id, isLink, isMarkdown, router, headerType, ...rest }) => {
-  let Component;
+const Header = ({ children, id, isLink, isMarkdown, headerType, ...rest }) => {
+  const router = useRouter();
+  let Component = () => <></>;
   if (isLink) {
     Component = () => (
-      <StyledLink id={id} to={`${router.pathname}#${id}`}>
-        {!isMarkdown ? <StyledSpan>{children}</StyledSpan> : children}
-      </StyledLink>
+      <div>
+        <Link href={`${router.pathname}#${id}`}>
+          <StyledLink id={id}>
+            {!isMarkdown ? <StyledSpan headerType={headerType}>{children}</StyledSpan> : children}
+          </StyledLink>
+        </Link>
+      </div>
     );
   } else {
     Component = () => (
