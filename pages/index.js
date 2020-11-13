@@ -33,7 +33,7 @@ const SplashPage = () => {
     <>
       <Head>
         <title>Welcome to TaylorRogers.com</title>
-        <link rel="icon" href="/sun.svg" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <Centered>
         <Row>
