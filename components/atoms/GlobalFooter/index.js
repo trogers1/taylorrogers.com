@@ -56,7 +56,7 @@ const GlobalFooter = () => {
         <div>&copy; Copyright {currentYear}. All Rights Reserved.</div>
       </LeftItems>
       <div>
-        <ExternalLink url="http://github.com/trogers1">Go to Taylor&apos;s GitHub</ExternalLink>
+        <ExternalLink href="http://github.com/trogers1">Go to Taylor&apos;s GitHub</ExternalLink>
       </div>
     </Footer>
   );
