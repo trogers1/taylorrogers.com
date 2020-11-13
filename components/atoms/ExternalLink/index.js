@@ -10,7 +10,7 @@ const StyledA = styled.a`
 
 const ExternalLink = ({ children, href, ...rest }) => {
   // Checks if given link starts with http(s):// and appends it if not
-  const fullUrl = /^(https?:\/\/)|(mailto:)/i.test(href) ? url : `https://${href}`;
+  const fullUrl = /^(https?:\/\/)|(mailto:)/i.test(href) ? href : `https://${href}`;
   return (
     <StyledA href={fullUrl} rel="noopener noreferrer" target="_blank" {...rest}>
       {children}
