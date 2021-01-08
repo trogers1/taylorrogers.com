@@ -34,6 +34,7 @@ const StyledImg = styled.img`
 `;
 
 const StyledParagraph = styled.p`
+  color: ${colors.textGrey};
   font-size: 2rem;
   font-weight: 400;
   margin-left: 15%;

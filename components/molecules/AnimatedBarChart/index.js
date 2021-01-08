@@ -16,7 +16,6 @@ const Centered = styled.div`
 `;
 
 const ChartWrapper = styled.div`
-  all: unset;
   width: 70%;
 `;
 
