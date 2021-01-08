@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import PageViews from 'components/organisms/PageViews';
+import Head from 'next/head';
 
 const GlobalStyles = ({ children }) => (
   <>
@@ -38,10 +39,23 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <GlobalStyles>
-        <PageViews />
-        <Component {...pageProps} />
-      </GlobalStyles>
+      <>
+        <Head>
+          <meta charset="utf-8" />
+          <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.svg" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#07132e" />
+          <link rel="apple-touch-icon" href="favicon.svg" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <GlobalStyles>
+          <PageViews />
+          <Component {...pageProps} />
+        </GlobalStyles>
+      </>
     );
   }
 }
