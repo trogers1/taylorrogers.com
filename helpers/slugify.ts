@@ -4,7 +4,7 @@
  * @param {array} string - the string to be slugified
  * @returns {string} the slugified version of the string
  */
-export default string => {
+const slugify = (string: string) => {
   string = string.trim();
   if (!string) {
     return string;
@@ -15,3 +15,5 @@ export default string => {
   newString = newString.toLowerCase();
   return newString;
 };
+
+export default slugify;
