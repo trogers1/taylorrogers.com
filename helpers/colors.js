@@ -12,8 +12,12 @@ export const mutedYellow = '#C87D20'; // Global Header/Footer, Inline Code text 
 export const mutedYellowRGB = '200, 125, 32'; // About Page Skill Bar Chart: hover
 export const mutedPink = '#b97195'; // Block quote left side bar, a circle button
 export const textGrey = '#b9b9b9'; // Block text
-export const siteBackground = '#25292D'; // Find in index.css
+export const siteBackground = '#07132e'; // Find also in GlobalStyles in _app.js
 export const yellow = '#F0BA47'; // Circle button text
+
+// New Synthwave Colors
+export const hotPink = '#aa2777';
+export const lightBlue = '#0e437a';
 
 export default {
   cardBackground,
@@ -30,5 +34,8 @@ export default {
   mutedPink,
   textGrey,
   siteBackground,
-  yellow
+  yellow,
+  // New Synthwave Colors
+  hotPink,
+  lightBlue,
 };
