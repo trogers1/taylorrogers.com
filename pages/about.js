@@ -120,7 +120,7 @@ const AboutPage = () => {
     'Data/System Engineering',
     'Other',
     'Soft Skills',
-    'All'
+    'All',
   ];
 
   // Search variables
@@ -132,7 +132,9 @@ const AboutPage = () => {
       setFilter('All');
       setSearchResults(
         aboutSkills
-          .filter(skill => skill.name.toLocaleLowerCase().includes(searchInput.toLocaleLowerCase()))
+          .filter((skill) =>
+            skill.name.toLocaleLowerCase().includes(searchInput.toLocaleLowerCase())
+          )
           .sort((a, b) => b.score - a.score)
       );
     } else if (currFilter === 'All') {
@@ -141,7 +143,7 @@ const AboutPage = () => {
     } else {
       setFilteredSkills(
         aboutSkills
-          .filter(skill => skill.types.some(item => item === currFilter))
+          .filter((skill) => skill.types.some((item) => item === currFilter))
           .sort((a, b) => b.score - a.score)
       );
     }
@@ -149,7 +151,7 @@ const AboutPage = () => {
   return (
     <Tabs
       tabGroupId="About"
-      onChange={choice => {
+      onChange={(choice) => {
         setSelectedTab(choice);
       }}
     >
@@ -227,7 +229,7 @@ const AboutPage = () => {
                     <StyledSelect
                       ariaLabel="Select Grouping of Skills to Display"
                       options={filterOptions}
-                      onChange={e => setFilter(e.target.value)}
+                      onChange={(e) => setFilter(e.target.value)}
                       selection={currFilter}
                       placeholder="Filter to a Grouping of Skills"
                     />
@@ -235,7 +237,7 @@ const AboutPage = () => {
                       ariaLabel="Search for Skills to Display"
                       placeholder="Search Skills"
                       value={searchInput}
-                      onChange={e => setSearchInput(e)}
+                      onChange={(e) => setSearchInput(e)}
                     />
                   </Flex>
                   <AnimatedBarChart
