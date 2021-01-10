@@ -15,16 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ]
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "include": [
-    "./"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["pages", "components", "config", "helpers", "utils"],
+  "exclude": ["node_modules"]
 }
