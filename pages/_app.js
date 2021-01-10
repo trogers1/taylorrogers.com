@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import PageViews from 'components/organisms/PageViews';
+import GlobalHeader from 'components/atoms/GlobalHeader';
 import Head from 'next/head';
 
 const GlobalStyles = ({ children }) => (
@@ -53,6 +54,7 @@ class MyApp extends App {
         </Head>
         <GlobalStyles>
           <PageViews />
+          <GlobalHeader />
           <Component {...pageProps} />
         </GlobalStyles>
       </>
