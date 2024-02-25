@@ -18,9 +18,7 @@ export default function Index() {
         <div className="container px-4">
           <div className="flex flex-col gap-4 md:gap-8">
             <div className="space-y-2">
-              <Heading component='h1'>
-                Taxing Laughter: The Joke Tax Chronicles
-              </Heading>
+              <Heading component="h1">Taxing Laughter: The Joke Tax Chronicles</Heading>
               <PostedDate>Posted on August 24, 2023</PostedDate>
             </div>
             <div className="prose prose-gray max-w-none not-italic">
@@ -30,8 +28,8 @@ export default function Index() {
               </p>
               <p>
                 Jokester began sneaking into the castle in the middle of the night and leaving jokes all over the place:
-                under the king&apos;s pillow, in his soup, even in the royal toilet. The king was furious, but he couldn&apos;t
-                seem to stop Jokester.
+                under the king&apos;s pillow, in his soup, even in the royal toilet. The king was furious, but he
+                couldn&apos;t seem to stop Jokester.
               </p>
               <p>
                 And then, one day, the people of the kingdom discovered that the jokes left by Jokester were so funny
@@ -45,10 +43,10 @@ export default function Index() {
                   <Link to="#">a brilliant plan</Link>: he would tax the jokes in the kingdom.
                 </p>
                 <Quote attribution={{ name: 'The King', subtitle: 'King of the Realm' }}>
-                  “After all,” he said, “everyone enjoys a good joke, so it&apos;s only fair that they should pay for the
-                  privilege.”
+                  “After all,” he said, “everyone enjoys a good joke, so it&apos;s only fair that they should pay for
+                  the privilege.”
                 </Quote>
-                <Heading component='h1'>The Joke Tax</Heading>
+                <Heading component="h1">The Joke Tax</Heading>
                 <p>The king&apos;s subjects were not amused. They grumbled and complained, but the king was firm:</p>
                 <ul>
                   <li>1st level of puns: 5 gold coins</li>
