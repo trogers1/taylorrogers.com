@@ -2,6 +2,7 @@ import type { MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
 import { Heading } from '~/components/Heading';
 import { Image } from '~/components/Image';
+import { PostedDate } from '~/components/PostedDate';
 import { Quote } from '~/components/Quote';
 
 const typewriterImg = './images/library-typewriter.webp';
@@ -20,7 +21,7 @@ export default function Index() {
               <Heading component='h1'>
                 Taxing Laughter: The Joke Tax Chronicles
               </Heading>
-              <p className="text-gray-500 dark:text-gray-400">Posted on August 24, 2023</p>
+              <PostedDate>Posted on August 24, 2023</PostedDate>
             </div>
             <div className="prose prose-gray max-w-none not-italic">
               <p>
