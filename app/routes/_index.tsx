@@ -1,5 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
+import { Heading } from '~/components/Heading';
 import { Image } from '~/components/Image';
 import { Quote } from '~/components/Quote';
 
@@ -16,9 +17,9 @@ export default function Index() {
         <div className="container px-4">
           <div className="flex flex-col gap-4 md:gap-8">
             <div className="space-y-2">
-              <h1 className="text-4xl font-bold tracking-tight lg:text-5xl xl:text-6xl font-serif">
+              <Heading component='h1'>
                 Taxing Laughter: The Joke Tax Chronicles
-              </h1>
+              </Heading>
               <p className="text-gray-500 dark:text-gray-400">Posted on August 24, 2023</p>
             </div>
             <div className="prose prose-gray max-w-none not-italic">
@@ -46,7 +47,7 @@ export default function Index() {
                   “After all,” he said, “everyone enjoys a good joke, so it&apos;s only fair that they should pay for the
                   privilege.”
                 </Quote>
-                <h3>The Joke Tax</h3>
+                <Heading component='h1'>The Joke Tax</Heading>
                 <p>The king&apos;s subjects were not amused. They grumbled and complained, but the king was firm:</p>
                 <ul>
                   <li>1st level of puns: 5 gold coins</li>
