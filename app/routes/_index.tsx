@@ -1,5 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 import { Link } from '@remix-run/react';
+import { Columns } from '~/components/Columns';
 import { Heading } from '~/components/Heading';
 import { Image } from '~/components/Image';
 import { PostedDate } from '~/components/PostedDate';
@@ -36,7 +37,7 @@ export default function Index() {
                 that they couldn&apos;t help but laugh. And once they started laughing, they couldn&apos;t stop.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-4 lg:gap-8">
+            <Columns>
               <div className="prose prose-gray max-w-none not-italic">
                 <p>
                   The king thought long and hard, and finally came up with
@@ -59,7 +60,7 @@ export default function Index() {
                 </p>
               </div>
               <Image alt="A typewriter in an ancient library" src={typewriterImg} caption="Image caption goes here" />
-            </div>
+            </Columns>
           </div>
         </div>
       </header>
