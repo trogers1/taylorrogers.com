@@ -1,11 +1,13 @@
-import type { LinksFunction } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
-import stylesheet from '~/tailwind.css';
-import { Nav } from './components/Nav';
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react";
+import { Analytics } from "@vercel/analytics/react";
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
-
-export default function App() {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -15,12 +17,15 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Nav />
-        <Outlet />
+        {children}
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        <Analytics />
       </body>
     </html>
   );
+}
+
+export default function App() {
+  return <Outlet />;
 }
