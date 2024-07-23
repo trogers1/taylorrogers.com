@@ -1,10 +1,18 @@
 import React from 'react';
 import App from 'next/app';
+import { styled } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
 import PageViews from 'components/organisms/PageViews';
 import GlobalHeader from 'components/atoms/GlobalHeader';
 import Head from 'next/head';
 
-const GlobalStyles = ({ children }) => (
+import { siteBackground, backgroundWhite } from 'helpers/colors';
+
+const theme = responsiveFontSizes(createMuiTheme())
+
+const GlobalStyles = ({ children, isDark }) => (
   <>
     {children}
     <style jsx global>{`
@@ -15,7 +23,7 @@ const GlobalStyles = ({ children }) => (
 
       body {
         height: 100%;
-        background: #07132e;
+        background: ${isDark ? siteBackground : backgroundWhite};
         margin: 0;
         padding: 0;
         font-family: 'Roboto', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
@@ -35,6 +43,10 @@ const GlobalStyles = ({ children }) => (
   </>
 );
 
+const MyContainer = styled(Container)({
+  minHeight: '100%',
+});
+
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
@@ -44,18 +56,26 @@ class MyApp extends App {
         <Head>
           <meta charset="utf-8" />
           <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.svg" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="theme-color" content="#07132e" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width shrink-to-fit=no" />
+          <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="apple-touch-icon" href="favicon.svg" />
           <link
             href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
             rel="stylesheet"
           />
         </Head>
-        <GlobalStyles>
+        <CssBaseline />
+        <GlobalStyles isDark>
           <PageViews />
-          <GlobalHeader />
-          <Component {...pageProps} />
+          <MyContainer>
+            <GlobalHeader />
+            <Component {...pageProps} />
+          </MyContainer>
         </GlobalStyles>
       </>
     );
