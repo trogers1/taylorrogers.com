@@ -1,19 +1,17 @@
-import type { MetaFunction } from "@vercel/remix";
+import type { MetaFunction } from '@vercel/remix';
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: 'New Remix App' }, { name: 'description', content: 'Welcome to Remix!' }];
 };
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
           <a
+            className="bg-blue-300 text-3xl font-bold underline"
             target="_blank"
             href="https://remix.run/tutorials/blog"
             rel="noreferrer"
@@ -22,11 +20,7 @@ export default function Index() {
           </a>
         </li>
         <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
+          <a target="_blank" href="https://remix.run/tutorials/jokes" rel="noreferrer">
             Deep Dive Jokes App Tutorial
           </a>
         </li>
