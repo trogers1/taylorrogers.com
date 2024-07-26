@@ -6,12 +6,12 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
+    <div >
       <h1>Welcome to Remix</h1>
       <ul>
         <li>
           <a
-            className="bg-blue-300 text-3xl font-bold underline"
+            className="bg-blue-300 text-3xl underline"
             target="_blank"
             href="https://remix.run/tutorials/blog"
             rel="noreferrer"

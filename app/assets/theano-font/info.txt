@@ -1,0 +1,7 @@
+license: SIL Open Font License (OFL)
+link: https://www.fontspace.com/theano-font-f13396
+
+Original files names:
+TheanoDidotRegular-R3pA => TheanoDidotRegular
+TheanoModernRegular-B7Wd => TheanoModernRegular
+TheanoOldStyleRegular-87Mg => TheanoOldStyleRegular
