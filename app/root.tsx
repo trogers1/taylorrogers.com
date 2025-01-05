@@ -9,6 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import stylesheet from './app.css?url';
+import posthog from 'posthog-js';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -71,6 +72,13 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <code>{stack}</code>
         </pre>
       )}
+      <button
+        onClick={() => {
+          posthog.capture('Test Event', { isSuccess: true });
+        }}
+      >
+        Test Event
+      </button>
     </main>
   );
 }
