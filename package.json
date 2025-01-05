@@ -5,6 +5,7 @@
   "scripts": {
     "build": "react-router build && node vercel/prepare.js",
     "dev": "cross-env NODE_ENV=development node ./dev-server.js",
+    "prettify": "prettier --write .",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
