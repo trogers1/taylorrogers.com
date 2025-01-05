@@ -72,13 +72,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <code>{stack}</code>
         </pre>
       )}
-      <button
-        onClick={() => {
-          posthog.capture('Test Event', { isSuccess: true });
-        }}
-      >
-        Test Event
-      </button>
     </main>
   );
 }
