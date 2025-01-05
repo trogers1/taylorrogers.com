@@ -1,4 +1,4 @@
-> **NOTE:** This app is very much a work-in-progress and currently under construction.
+> **NOTE:** This app is very much a work-in-progress and currently under construction. It also hasn't been worked on for quite some time, as you can see be the use of CRA 😅
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
