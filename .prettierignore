@@ -1,0 +1,11 @@
+# Ignore artifacts:
+build
+coverage
+.husky
+.gitignore
+.prettierignore
+.gitattributes
+.nvmrc
+public/favicon.ico
+public/*.png
+*.sh
