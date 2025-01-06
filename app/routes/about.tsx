@@ -1,38 +1,25 @@
 'use client';
 
 import { useState } from 'react';
-import { Github, Linkedin, Mail, MapPin, Moon, Sun } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { Button } from '~/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '~/components/ui/card';
+import { Card, CardContent, CardHeader } from '~/components/ui/card';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '~/components/ui/collapsible';
-import { Switch } from '~/components/ui/switch';
 import { SkillGraph } from '~/components/custom/skill-graph';
 
 export default function SoftwareEngineerResume() {
-  const [darkMode, setDarkMode] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
-  };
 
   const toggleSection = (section: string) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen`}>
       <div className="bg-gray-100 px-4 py-12 text-gray-900 transition-colors duration-200 dark:bg-gray-900 dark:text-gray-100 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col items-center">
           <div className="relative mb-4">
@@ -111,19 +98,12 @@ export default function SoftwareEngineerResume() {
                 </a>
               </div>
             </div>
-            <div className="flex items-center">
-              <Sun className="mr-2 h-4 w-4" />
-              <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
-              <Moon className="ml-2 h-4 w-4" />
-            </div>
           </CardHeader>
 
           <CardContent className="p-6">
             <section className="mb-6">
               <h2 className="mb-2 text-2xl font-semibold">Summary</h2>
-              <p>
-                Do I want this????
-              </p>
+              <p>Do I want this????</p>
             </section>
 
             <Collapsible
@@ -136,7 +116,7 @@ export default function SoftwareEngineerResume() {
                   <span>{expandedSection === 'skills' ? '▲' : '▼'}</span>
                 </Button>
               </CollapsibleTrigger>
-              <CollapsibleContent className="p-6 mt-2">
+              <CollapsibleContent className="mt-2 p-6">
                 <SkillGraph />
               </CollapsibleContent>
             </Collapsible>
@@ -154,13 +134,14 @@ export default function SoftwareEngineerResume() {
                   <span>{expandedSection === 'experience' ? '▲' : '▼'}</span>
                 </Button>
               </CollapsibleTrigger>
-              <CollapsibleContent className="p-6 mt-2">
+              <CollapsibleContent className="mt-2 p-6">
                 <div className="mb-4">
                   <h3 className="text-xl font-semibold">Engineering Manager</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    <strong>Lightcast</strong> (Formerly: Emsi) -- Moscow, ID | May 2022 - Present
+                    <strong>Lightcast</strong> (Formerly: Emsi) -- Moscow, ID |
+                    May 2022 - Present
                   </p>
-                  <ul className="p-6 <ist-inside list-disc">
+                  <ul className="<ist-inside list-disc p-6">
                     <li>
                       Developed mainly React.js and Node.js applications hosted
                       on AWS, leveraging S3, Cloudfront, DynamoDB, Postgres
@@ -203,18 +184,22 @@ export default function SoftwareEngineerResume() {
                 <div>
                   <h3 className="text-xl font-semibold">Software Engineer</h3>
                   <p className="text-gray-600 dark:text-gray-400">
-                    <strong>Trustpilot</strong> -- Edinburgh, UK | Jun 2021 - Dec 2021
+                    <strong>Trustpilot</strong> -- Edinburgh, UK | Jun 2021 -
+                    Dec 2021
                   </p>
-                  <ul className="p-6 <ist-inside list-disc">
+                  <ul className="<ist-inside list-disc p-6">
                     <li>
-                      Supported and extended over 100 mission-critical AWS microservices.
+                      Supported and extended over 100 mission-critical AWS
+                      microservices.
                     </li>
                     <li>
-                      Introduced testing guidelines and best practices while finding and fixing hundreds of previously unknown or ignored bugs.
-
+                      Introduced testing guidelines and best practices while
+                      finding and fixing hundreds of previously unknown or
+                      ignored bugs.
                     </li>
                     <li>
-                      Initiated Agile and Scrum processes and refocused the team toward an ethos of testing and documentation.
+                      Initiated Agile and Scrum processes and refocused the team
+                      toward an ethos of testing and documentation.
                     </li>{' '}
                     <li>
                       Led the development and launch of a brand-new, AI-based
@@ -248,9 +233,7 @@ export default function SoftwareEngineerResume() {
               <h2 className="mb-2 text-2xl font-semibold">Education</h2>
               <div>
                 <h3 className="text-xl font-semibold">
-                  Minor in Computer Science
-                  BA History
-                  BA Spanish
+                  Minor in Computer Science BA History BA Spanish
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400">
                   University of Idaho | Graduated: May 2014
