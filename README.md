@@ -51,3 +51,13 @@ This template comes with [Tailwind CSS](https://tailwindcss.com/) already config
 ---
 
 Built with ❤️ using React Router.
+
+
+## Todo 
+
+[ ] Create /about
+[ ] Add redirects
+[ ] Add e2e redirect testing
+    [ ] add CI pipeline
+[ ] Add external links
+[ ] Add animations
