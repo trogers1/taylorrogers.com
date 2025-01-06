@@ -1,46 +1,20 @@
-import logoDark from './logo-dark.svg';
-import logoLight from './logo-light.svg';
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 export function Welcome({ message }: { message: string }) {
   return (
     <main className="flex items-center justify-center pb-4 pt-16">
       <div className="flex min-h-0 flex-1 flex-col items-center gap-16">
-        <header className="flex flex-col items-center gap-9">
-          <div className="w-[500px] max-w-[100vw] p-4">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
-          </div>
-        </header>
-        <div className="w-full max-w-[300px] space-y-6 px-4">
-          <nav className="space-y-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
-            <p className="text-center leading-6 text-gray-700 dark:text-gray-200">
-              What&apos;s next?
-            </p>
-            <ul>
-              {resources.map(({ href, text, icon }) => (
-                <li key={href}>
-                  <a
-                    className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    {text}
-                  </a>
-                </li>
-              ))}
-              <li className="self-stretch p-3 leading-normal">{message}</li>
-            </ul>
-          </nav>
+        <h1 className="mb-8 text-4xl font-bold">👋 Welcome to Taylor's Site</h1>
+        <p className="mb-8 text-muted-foreground"></p>
+        <div className="sm:w-full md:w-1/2">
+          <Alert>
+            <AlertTitle className="text-lg">🚧 Heads up!</AlertTitle>
+            <AlertDescription>
+              This site is a work-in-progress (as is the way with
+              side-projects). I apologize for anything that doesn't work quite
+              as well as it should.
+            </AlertDescription>
+          </Alert>
         </div>
       </div>
     </main>
