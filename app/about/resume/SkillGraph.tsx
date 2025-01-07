@@ -12,7 +12,7 @@ export function SkillGraph() {
     <div className="mx-auto w-full max-w-2xl">
       <h3 className="mb-6 text-center text-lg font-bold">Skill Types</h3>
 
-      <div className="flex w-full justify-center">
+      <div className="flex w-full flex-col justify-center sm:flex-row">
         {allTags.map((tag) => (
           <Toggle
             className="m-2"
