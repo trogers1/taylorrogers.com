@@ -11,6 +11,13 @@ body {
   }
 }
 
+
+@layer base {
+  html {
+    font-family: Georgia, Cambria, Times New Roman, Times, serif, system-ui;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
