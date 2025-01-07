@@ -1,13 +1,14 @@
 {
   "version": 3,
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "routes": [
     {
       "src": "/favicon.ico",
       "dest": "/favicon.ico"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
       "src": "/(.*)",
