@@ -1,7 +1,7 @@
 'use client';
 
 import type { Route } from './+types/home';
-import { AboutPage } from '~/about/page';
+import { AboutPage } from '~/about/Page';
 
 export function meta({}: Route.MetaArgs) {
   return [
