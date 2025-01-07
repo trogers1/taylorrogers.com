@@ -33,7 +33,7 @@ export default function Navbar() {
     <nav className="bg-muted py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         <div className="flex space-x-4">
-          <NavLink
+          {/* <NavLink
             to="/"
             className="text-lg font-semibold transition-colors duration-200 hover:text-muted-foreground"
           >
@@ -44,7 +44,7 @@ export default function Navbar() {
             className="text-lg font-semibold transition-colors duration-200 hover:text-muted-foreground"
           >
             About
-          </NavLink>
+          </NavLink> */}
         </div>
         <div className="flex items-center">
           <Sun className="mr-2 h-4 w-4" />
