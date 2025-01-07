@@ -1,16 +1,8 @@
-# Welcome to React Router!
+# Welcome to the code for TaylorRogers.com!
 
-A modern, production-ready template for building full-stack React applications using React Router.
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+This is the repository that supports [Taylor's website](https://www.taylorrogers.com). 
+It was bootstrapped with [React-Router's](https://reactrouter.com/start/framework/installation#installation)
+vercel [template](https://github.com/remix-run/react-router-templates/blob/main/README.md) (at react-router v7.1.1).
 
 ## Getting Started
 
@@ -42,22 +34,19 @@ npm run build
 
 ## Deployment
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjacob-ebey%2Freact-router-templates%2Ftree%2Fmain%2Fvercel&project-name=my-react-router-app&repository-name=my-react-router-app)
+Just use the Vercel auto-deployment with Vite configuration 😉.
 
 ## Styling
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
----
 
-Built with ❤️ using React Router.
+## Todo
 
-
-## Todo 
-
-[ ] Create /about
-[ ] Add redirects
-[ ] Add e2e redirect testing
-    [ ] add CI pipeline
-[ ] Add external links
-[ ] Add animations
+- [ ] Create /about
+- [ ] Add redirects
+- [ ] Add e2e redirect testing
+  - [ ] add CI pipeline
+  - [ ] Test that themes work and are maintained across refresh/nav
+- [ ] Add external links
+- [ ] Add animations
