@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import fuzzy from 'fuzzy';
+import { Command } from 'cmdk';
 import type { FilterSelectionComponentProps } from './FilterBuilderInput';
 
-type ObjOption = Record<string, any>;
+export type ObjOption = Record<string, any>;
 type ObjOptionSelectorProps = FilterSelectionComponentProps & {
   options: ObjOption[] | Promise<ObjOption[]>;
   searchKey: keyof ObjOption;
@@ -26,28 +26,23 @@ export const ObjOptionSelector: React.FC<ObjOptionSelectorProps> = ({
     };
     awaitOptions(options);
   }, [options]);
-  if (!loadedOptions) {
-    return <span>Loading...</span>;
-  }
   return (
-    <ul aria-label="Options List">
-      {fuzzy
-        .filter(input || '', loadedOptions, {
-          extract: (option) => option[searchKey],
-        })
-        .map((fuzzyResult) => (
-          <li
-            aria-label="Option"
-            key={fuzzyResult.original[searchKey]}
-            onKeyDown={(event) => {
-              // TODO: implement this
-              console.log({ target: event.target });
-            }}
-            onClick={onFilterOptionSelect}
-          >
-            {fuzzyResult.original[searchKey]}
-          </li>
-        ))}
-    </ul>
+    <Command.Dialog open={true}>
+      <Command.Input value={input} hidden />
+      <Command.List>
+        {!loadedOptions && <Command.Loading>Loading...</Command.Loading>}
+
+        <Command.Empty>No results found.</Command.Empty>
+        {loadedOptions &&
+          loadedOptions.map((option) => (
+            <Command.Item
+              onSelect={onFilterOptionSelect}
+              key={option[searchKey]}
+            >
+              {option[searchKey]}
+            </Command.Item>
+          ))}
+      </Command.List>
+    </Command.Dialog>
   );
 };
