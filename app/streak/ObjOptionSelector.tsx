@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import fuzzy from 'fuzzy';
 import type { FilterSelectionComponentProps } from './FilterBuilderInput';
 
-type AutocompleteOption = Record<string, any>;
-type AutocompleteProps<T> = FilterSelectionComponentProps<T> & {
-  options: AutocompleteOption[] | Promise<AutocompleteOption[]>;
-  searchKey: keyof AutocompleteOption;
+type ObjOption = Record<string, any>;
+type ObjOptionSelectorProps = FilterSelectionComponentProps & {
+  options: ObjOption[] | Promise<ObjOption[]>;
+  searchKey: keyof ObjOption;
 };
-export const Autocomplete: React.FC<AutocompleteProps> = ({
+export const ObjOptionSelector: React.FC<ObjOptionSelectorProps> = ({
   input,
   onFilterOptionSelect,
   options,
@@ -18,26 +18,26 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   > | null>(null);
   useEffect(() => {
     setLoadedOptions(null);
-    const awaitOptions = async () => {
-      console.log('awaiting options', options);
-      const newLoadedOptions = await Promise.resolve(options);
+    const awaitOptions = async (currOptions: typeof options) => {
+      console.log('awaiting options', currOptions);
+      const newLoadedOptions = await Promise.resolve(currOptions);
       console.log('options now loaded: ', newLoadedOptions);
       setLoadedOptions(newLoadedOptions);
     };
-    awaitOptions();
+    awaitOptions(options);
   }, [options]);
   if (!loadedOptions) {
     return <span>Loading...</span>;
   }
   return (
-    <ul aria-label="Autocomplete options">
+    <ul aria-label="Options List">
       {fuzzy
-        .filter(input, loadedOptions, {
+        .filter(input || '', loadedOptions, {
           extract: (option) => option[searchKey],
         })
         .map((fuzzyResult) => (
           <li
-            aria-label="Autocomplete option"
+            aria-label="Option"
             key={fuzzyResult.original[searchKey]}
             onKeyDown={(event) => {
               // TODO: implement this

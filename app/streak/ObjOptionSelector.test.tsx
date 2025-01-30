@@ -1,9 +1,10 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
-import { Autocomplete } from './Autocomplete';
+import { ObjOptionSelector } from './ObjOptionSelector';
+import type { KeyboardEvent, MouseEvent } from 'react';
 
-describe('Autocomplete Component', () => {
+describe('ObjOptionSelector Component', () => {
   const mockOptions = [
     { id: 1, name: 'Apple' },
     { id: 2, name: 'Banana' },
@@ -20,18 +21,18 @@ describe('Autocomplete Component', () => {
   };
 
   it('should display "Loading..." when options are being fetched', async () => {
-    const asyncOptions = new Promise((resolve) => {
+    const asyncOptions: Promise<typeof mockOptions> = new Promise((resolve) => {
       setTimeout(() => resolve(mockOptions), 1000);
     });
 
-    render(<Autocomplete {...defaultProps} options={asyncOptions} />);
+    render(<ObjOptionSelector {...defaultProps} options={asyncOptions} />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('should render filtered options based on input', async () => {
     act(() => {
-      render(<Autocomplete {...defaultProps} input="App" />);
+      render(<ObjOptionSelector {...defaultProps} input="App" />);
     });
 
     expect(await screen.findByText('Apple')).toBeInTheDocument();
@@ -39,51 +40,69 @@ describe('Autocomplete Component', () => {
     expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
   });
 
-  it.todo('should render fuzzy matches as a user types', async () => {
-    const user = userEvent.setup();
-    render(
-      <Autocomplete
-        {...defaultProps}
-        options={[...mockOptions, { id: 4, name: 'Savana' }]}
-      />,
+  it('should render fuzzy matches to input', async () => {
+    act(() => {
+      render(
+        <ObjOptionSelector
+          {...defaultProps}
+          options={[...mockOptions, { id: 4, name: 'Savana' }]}
+          input="ana"
+        />,
+      );
+    });
+
+    await waitFor(() =>
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument(),
     );
-
-    expect(screen.getByText('Apple')).toBeInTheDocument();
-    expect(screen.queryByText('Banana')).toBeInTheDocument();
-    expect(screen.queryByText('Savana')).toBeInTheDocument();
-    expect(screen.queryByText('Cherry')).toBeInTheDocument();
-
-    await user.type(screen.getByRole('input'), 'ana');
-    expect(screen.getByText('Apple')).not.toBeInTheDocument();
     expect(screen.queryByText('Banana')).toBeInTheDocument();
     expect(screen.queryByText('Savana')).toBeInTheDocument();
     expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
   });
-  it.todo(
-    'should call onFilterOptionSelect when an option is clicked',
-    async () => {
-      render(<Autocomplete {...defaultProps} input="Ban" />);
+  it('should call onFilterOptionSelect when an option is clicked', async () => {
+    const user = userEvent.setup();
+    let selection: any = null;
+    render(
+      <ObjOptionSelector
+        {...defaultProps}
+        input="Ban"
+        onFilterOptionSelect={(args) => {
+          selection = args.currentTarget.textContent;
+        }}
+      />,
+    );
 
-      const option = screen.getByText('Banana');
-      fireEvent.click(option);
+    const option = await screen.findByText('Banana');
+    await user.click(option);
 
-      expect(mockOnFilterOptionSelect).toHaveBeenCalledTimes(1);
-    },
-  );
+    expect(selection).toStrictEqual('Banana');
+  });
 
-  it.todo('should handle keyboard events on options', async () => {
-    render(<Autocomplete {...defaultProps} input="Cher" />);
+  it('should handle keyboard events on options', async () => {
+    const user = userEvent.setup();
+    let selection: any = null;
+    render(
+      <ObjOptionSelector
+        {...defaultProps}
+        input="Ban"
+        onFilterOptionSelect={(args) => {
+          selection = args.currentTarget.textContent;
+        }}
+      />,
+    );
 
-    const option = screen.getByText('Cherry');
+    const option = await screen.findByText('Banana');
+    expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
+    await user.keyboard('{ArrowDown}{Enter}');
+
+    expect(selection).toStrictEqual('Banana');
     expect(screen.queryByText('Cherry')).toBeInTheDocument();
-    fireEvent.keyDown(option, { key: 'Enter', code: 'Enter' });
     expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
   });
 
   it.todo(
     'should NOT select an option for key events other than ENTER',
     async () => {
-      render(<Autocomplete {...defaultProps} input="Cher" />);
+      render(<ObjOptionSelector {...defaultProps} input="Cher" />);
 
       const option = screen.getByText('Cherry');
       expect(option).toBeInTheDocument();
@@ -97,7 +116,7 @@ describe('Autocomplete Component', () => {
   );
 
   it.todo('should allow focus on options via keyboard', async () => {
-    render(<Autocomplete {...defaultProps} input={undefined} />);
+    render(<ObjOptionSelector {...defaultProps} input={undefined} />);
 
     const option = screen.getByLabelText('Autocomplete option');
     expect(option).not.toHaveFocus();
@@ -108,7 +127,7 @@ describe('Autocomplete Component', () => {
   });
 
   it.todo('should not render options that do not match the input', async () => {
-    render(<Autocomplete {...defaultProps} input="Berry" />);
+    render(<ObjOptionSelector {...defaultProps} input="Berry" />);
 
     expect(screen.queryByText('Apple')).not.toBeInTheDocument();
     expect(screen.queryByText('Banana')).not.toBeInTheDocument();
