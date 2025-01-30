@@ -1,24 +1,36 @@
 'use client';
 import {
+  useState,
+  type FC,
+  type KeyboardEvent,
+  type KeyboardEventHandler,
+  type MouseEvent,
+  type TouchEvent,
+} from 'react';
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '~/components/ui/popover';
 import { Badge } from '~/components/ui/badge';
-import { Autocomplete } from './Autocomplete';
+import { ObjOptionSelector } from './ObjOptionSelector';
 import type { AllRelationalOperators, LogicalOperator } from './operators';
-import { useState } from 'react';
 
 export type FilterOption = string | Date | boolean;
-export type FilterSelectionFn = (selection: any) => void;
+export type FilterSelectionFn = (
+  event:
+    | MouseEvent<HTMLElement>
+    | KeyboardEvent<HTMLElement>
+    | TouchEvent<HTMLElement>,
+) => void;
 export type FilterSelectionComponentProps = {
-  input: string;
+  input?: string;
   onFilterOptionSelect: FilterSelectionFn;
 };
 export type FilterDefinition = {
   key: string;
-  validComparators: Array<AllRelationalOperators>;
-  SelectOptions?: (arg: FilterSelectionComponentProps) => JSX.Element;
+  validRelationalOperators: Array<AllRelationalOperators>;
+  OptionSelector?: FC<FilterSelectionComponentProps>;
 };
 
 // onFilterUpdate
@@ -73,6 +85,10 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
     inputText,
   });
   const onFilterSelection: FilterSelectionFn = (event) => {
+    // Do not handle other key presses
+    if (getIsKeyboardEvent(event) && event.key !== 'Enter') {
+      return;
+    }
     const matchingFilter = filterDefinitions.find(
       (currFilterDef) => currFilterDef.key === event.currentTarget.textContent,
     );
@@ -84,7 +100,8 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
       filterDefinitions,
       clickCurrTarget: event.currentTarget.textContent,
     });
-    setCurrFilter(matchingFilter ?? null);
+    setCurrFilter(matchingFilter);
+    setInputText(undefined);
     setIsPopoverOpen(false);
     return matchingFilter;
   };
@@ -114,8 +131,33 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         {currFilter === null && (
-          <Autocomplete searchKey="key" onOptionSelect={} />
+          <ObjOptionSelector
+            searchKey="key"
+            onFilterOptionSelect={onFilterSelection}
+            input={inputText}
+            options={filterDefinitions}
+          />
         )}
+        {currFilter !== null && relationalOperator === null && (
+          <ObjOptionSelector
+            searchKey="key"
+            onFilterOptionSelect={(selection: AllRelationalOperators) => {
+              setRelationalOperator(selection);
+              setInputText(undefined);
+              setIsPopoverOpen(false);
+            }}
+            input={inputText}
+            options={filterDefinitions}
+          />
+        )}
+        {currFilter !== null &&
+          relationalOperator !== null &&
+          currFilter.OptionSelector && (
+            <currFilter.OptionSelector
+              input={inputText}
+              onFilterOptionSelect={(selection) => {}}
+            />
+          )}
       </PopoverContent>
     </Popover>
   );
