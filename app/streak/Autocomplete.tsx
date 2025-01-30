@@ -3,7 +3,7 @@ import fuzzy from 'fuzzy';
 import type { FilterSelectionComponentProps } from './FilterBuilderInput';
 
 type AutocompleteOption = Record<string, any>;
-type AutocompleteProps = FilterSelectionComponentProps & {
+type AutocompleteProps<T> = FilterSelectionComponentProps<T> & {
   options: AutocompleteOption[] | Promise<AutocompleteOption[]>;
   searchKey: keyof AutocompleteOption;
 };
@@ -19,7 +19,9 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
   useEffect(() => {
     setLoadedOptions(null);
     const awaitOptions = async () => {
+      console.log('awaiting options', options);
       const newLoadedOptions = await Promise.resolve(options);
+      console.log('options now loaded: ', newLoadedOptions);
       setLoadedOptions(newLoadedOptions);
     };
     awaitOptions();
@@ -28,13 +30,14 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     return <span>Loading...</span>;
   }
   return (
-    <ul>
+    <ul aria-label="Autocomplete options">
       {fuzzy
         .filter(input, loadedOptions, {
           extract: (option) => option[searchKey],
         })
         .map((fuzzyResult) => (
           <li
+            aria-label="Autocomplete option"
             key={fuzzyResult.original[searchKey]}
             onKeyDown={(event) => {
               // TODO: implement this
