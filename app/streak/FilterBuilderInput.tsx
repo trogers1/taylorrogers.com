@@ -19,7 +19,7 @@ export type FilterSelectionComponentProps = {
 };
 export type FilterDefinition = {
   filterKey: string;
-  validRelationalOperators: Array<AllRelationalOperators>;
+  validRelationalOperators: readonly AllRelationalOperators[];
   options?: Record<string, any>[];
   optionKey: string;
   getOptions?:
@@ -46,7 +46,7 @@ export type FilterUpdateFunction = ({
 export type FilterBuilderArgs = {
   filterState: FilterState;
   onFilterUpdate: FilterUpdateFunction;
-  filterDefinitions: FilterDefinition[];
+  filterDefinitions: readonly FilterDefinition[];
 };
 
 export const allowedInputBuiltinTypes = [
@@ -90,6 +90,10 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
       setLoadedOptions(currFilter.options);
       return;
     }
+    // If there are no options and no getOptions, set to undefined
+    if (currFilter && !currFilter.options && !currFilter.getOptions) {
+      setLoadedOptions(undefined);
+    }
     // If options aren't provided, we use the input to getOptions()
     if (currFilter && !currFilter.options && currFilter.getOptions) {
       setLoadedOptions(undefined);
@@ -97,24 +101,23 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
         currInput: typeof inputText,
         currentFilter: typeof currFilter,
       ) => {
-        console.log('awaiting', currInput);
         const newLoadedOptions = await Promise.resolve(
           currentFilter.getOptions
             ? currentFilter.getOptions(currInput)
             : undefined,
         );
-        console.log('loaded', newLoadedOptions);
         setLoadedOptions(newLoadedOptions);
       };
       awaitOptions(inputText, currFilter);
     }
-  }, [inputText, currFilter, currFilter?.options, currFilter?.getOptions]);
+  }, [inputText, currFilter]);
   // We can use 'optionKey' as the input type if no way is provided to get options
   const shouldUseValueDirectly =
     currFilter &&
     currRelOperator &&
     !currFilter.options &&
-    !currFilter.getOptions;
+    !currFilter.getOptions &&
+    allowedInputBuiltinTypes.includes(currFilter.optionKey);
   let filteredOptions:
     | typeof filteredFilterDefOptions
     | typeof filteredRelOpOptions
@@ -131,7 +134,6 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
     const value = e.target.value;
     setInputText(value);
     if (shouldUseValueDirectly && currFilter.optionKey === 'date') {
-      console.log('date', value);
       handleValueSelection([value]);
       return;
     }
@@ -139,12 +141,14 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
     // The options we're searching through depend on where we are in the filter-building flow.
     // If currFilter is unset, we're looking through the filter definitions
     if (!currFilter) {
-      const filtered = fuzzy.filter(value, filterDefinitions, {
+      const filtered = fuzzy.filter(value, [...filterDefinitions], {
         extract: (e) => e.filterKey,
       });
       setFilteredFilterDefOptions(filtered.map((option) => option.original));
     } else if (!currRelOperator) {
-      const filtered = fuzzy.filter(value, currFilter.validRelationalOperators);
+      const filtered = fuzzy.filter(value, [
+        ...currFilter.validRelationalOperators,
+      ]);
       setFilteredRelOpOptions(filtered.map((option) => option.original));
     } else {
       // TODO: Figure out async option-getting for values. Maybe just use components.
@@ -218,19 +222,30 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
     } else if (e.key === 'Enter' && currFilter && currRelOperator) {
       // Select whatever is being typed as-is
       handleValueSelection([inputText]);
+    } else if (e.key === 'Backspace' && inputText === '') {
+      // Delete either the work-in-progress filter or focus on the the last finished filter
+      if (currFilter) {
+        const lastFilterPill = document.getElementById('filterPill_inProgress');
+        lastFilterPill?.focus();
+      } else {
+        const lastFilterPill = document.getElementById(
+          `filterPill${filterState[filterState.length - 1].localId}`,
+        );
+        lastFilterPill?.focus();
+      }
     }
 
     // Scroll the active option into view
     if (optionsRef.current && activeOptionIndex !== -1) {
       const activeOption = optionsRef.current.children[activeOptionIndex];
-      if (activeOption) {
+      if (activeOption && activeOption.scrollIntoView) {
         activeOption.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
   };
 
   return (
-    <div className="flex-start align-right p-none flex border border-gray-500 bg-gray-300">
+    <div className="flex-start align-right p-none flex rounded-md border border-gray-300 border-gray-500 bg-[#121212] focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
       {filterState.map((filterStateItem) => (
         <FilterPill
           key={filterStateItem.localId}
@@ -239,7 +254,6 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
           localId={filterStateItem.localId}
           relationalOperator={filterStateItem.relationalOperator}
           onDelete={({ localId }) => {
-            console.log('here');
             onFilterUpdate({
               newFilterState: filterState.filter(
                 (filterVal) => filterVal.localId !== localId,
@@ -267,59 +281,66 @@ export const FilterBuilderInput: React.FC<FilterBuilderArgs> = ({
           // onBlur={() => setTimeout(() => setIsFocused(false), 200)} // Delay to allow click on options
           onKeyDown={handleKeyDown}
           placeholder="Type to search..."
-          className="text-grey-200 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="w-full border-none p-2 text-white focus:outline-none"
         />
 
         {/* Floating Options Div */}
         {isFocused && filteredOptions.length > 0 && (
           <div
             ref={optionsRef}
-            className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-gray-300 bg-white shadow-lg"
+            className="absolute z-10 mt-1 max-h-48 w-full overflow-y-auto rounded-md border border-gray-300 bg-white shadow-lg dark:bg-gray-900"
           >
             <ul>
               {currFilter === null &&
-                filterDefinitions.map((filterDef, index) => (
-                  <div
+                filteredFilterDefOptions.map((filterDef, index) => (
+                  <li
+                    aria-label={`Option: ${filterDef.filterKey}`}
                     key={filterDef.filterKey}
                     onClick={() => handleFilterSelect(filterDef)}
-                    className={`cursor-pointer p-2 hover:bg-gray-100 ${
-                      index === activeOptionIndex ? 'border-red-900' : ''
+                    className={`cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${
+                      index === activeOptionIndex
+                        ? 'bg-gray-200 dark:bg-gray-700'
+                        : ''
                     }`}
                   >
                     {filterDef.filterKey}
-                  </div>
+                  </li>
                 ))}
               {currFilter !== null &&
                 currRelOperator === null &&
-                [...new Set(currFilter.validRelationalOperators)].map(
-                  (operator, index) => (
-                    <div
-                      key={operator}
-                      onClick={() => handleRelationalOperatorSelect(operator)}
-                      className={`cursor-pointer p-2 hover:bg-gray-100 ${
-                        index === activeOptionIndex ? 'border-red-900' : ''
-                      }`}
-                    >
-                      {operator}
-                    </div>
-                  ),
-                )}
+                [...new Set(filteredRelOpOptions)].map((operator, index) => (
+                  <li
+                    aria-label={`Option: ${operator}`}
+                    key={operator}
+                    onClick={() => handleRelationalOperatorSelect(operator)}
+                    className={`cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${
+                      index === activeOptionIndex
+                        ? 'bg-gray-200 dark:bg-gray-700'
+                        : ''
+                    }`}
+                  >
+                    {operator}
+                  </li>
+                ))}
               {currFilter !== null &&
                 currRelOperator !== null &&
-                loadedOptions &&
+                loadedOptions?.length &&
                 currFilter.optionKey &&
                 loadedOptions.map((option, index) => (
-                  <div
+                  <li
+                    aria-label={`Option: ${option[currFilter.optionKey]}`}
                     key={option[currFilter.optionKey]}
                     onClick={() =>
                       handleValueSelection([option[currFilter.optionKey]])
                     }
-                    className={`cursor-pointer p-2 hover:bg-gray-100 ${
-                      index === activeOptionIndex ? 'border-red-900' : ''
+                    className={`cursor-pointer p-2 hover:bg-gray-200 dark:hover:bg-gray-700 ${
+                      index === activeOptionIndex
+                        ? 'bg-gray-200 dark:bg-gray-700'
+                        : ''
                     }`}
                   >
                     {option[currFilter.optionKey]}
-                  </div>
+                  </li>
                 ))}
             </ul>
           </div>

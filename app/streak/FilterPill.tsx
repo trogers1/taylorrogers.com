@@ -11,13 +11,17 @@ export const FilterPill = ({
   localId,
   onDelete,
 }: FilterPillArgs) => {
+  // Determine the color scheme based on whether `localId` exists
+  const colorScheme = localId
+    ? 'bg-blue-500 border-blue-700 hover:bg-blue-600'
+    : 'bg-red-500 border-red-700 hover:bg-red-600';
   return (
     <button
       onClick={(_) =>
         onDelete({ localId, filterKey, values, relationalOperator })
       }
-      aria-label={`Applied Filter: ${filterKey} ${relationalOperator} ${values?.join(', ')}`}
-      id={`filterPill${localId}`}
+      aria-label={`${localId ? 'Applied' : 'In progress'} Filter: ${filterKey} ${relationalOperator || ''} ${values ? values.join(', ') : ''}`}
+      id={`filterPill${localId ?? '_inProgress'}`}
       aria-details="Press 'Enter' or 'Backspace' to delete"
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === 'Backspace') {
@@ -25,7 +29,7 @@ export const FilterPill = ({
         }
       }}
       tabIndex={0}
-      className={`inline-flex items-center rounded-s-full rounded-e-${values ? 'full' : 'none'} bg-${values ? 'blue' : 'red'}-500 font-small py-none px-3 text-xs text-black`}
+      className={`inline-flex items-center rounded-full border-2 ${colorScheme} font-small px-3 py-1 text-xs text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-red-500`}
     >
       {filterKey} {relationalOperator} {values?.join(', ')}
       <div className="ml-2 rounded-full p-1 hover:bg-blue-600 focus:outline-none">
