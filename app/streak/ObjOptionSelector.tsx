@@ -8,7 +8,6 @@ type ObjOptionSelectorProps = FilterSelectionComponentProps & {
   searchKey: keyof ObjOption;
 };
 export const ObjOptionSelector: React.FC<ObjOptionSelectorProps> = ({
-  input,
   onFilterOptionSelect,
   options,
   searchKey,
@@ -19,30 +18,19 @@ export const ObjOptionSelector: React.FC<ObjOptionSelectorProps> = ({
   useEffect(() => {
     setLoadedOptions(null);
     const awaitOptions = async (currOptions: typeof options) => {
-      console.log('awaiting options', currOptions);
       const newLoadedOptions = await Promise.resolve(currOptions);
-      console.log('options now loaded: ', newLoadedOptions);
       setLoadedOptions(newLoadedOptions);
     };
     awaitOptions(options);
   }, [options]);
   return (
-    <Command.Dialog open={true}>
-      <Command.Input value={input} hidden />
-      <Command.List>
-        {!loadedOptions && <Command.Loading>Loading...</Command.Loading>}
-
-        <Command.Empty>No results found.</Command.Empty>
-        {loadedOptions &&
-          loadedOptions.map((option) => (
-            <Command.Item
-              onSelect={onFilterOptionSelect}
-              key={option[searchKey]}
-            >
-              {option[searchKey]}
-            </Command.Item>
-          ))}
-      </Command.List>
-    </Command.Dialog>
+    <Command.List className="focus:border-blue">
+      {loadedOptions &&
+        loadedOptions.map((option) => (
+          <Command.Item onSelect={onFilterOptionSelect} key={option[searchKey]}>
+            {option[searchKey]}
+          </Command.Item>
+        ))}
+    </Command.List>
   );
 };
