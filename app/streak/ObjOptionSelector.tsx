@@ -1,36 +1,59 @@
 import { useEffect, useState } from 'react';
-import { Command } from 'cmdk';
 import type { FilterSelectionComponentProps } from './FilterBuilderInput';
 
 export type ObjOption = Record<string, any>;
 type ObjOptionSelectorProps = FilterSelectionComponentProps & {
-  options: ObjOption[] | Promise<ObjOption[]>;
+  options?: ObjOption[];
+  getOptions?: (
+    input: FilterSelectionComponentProps['input'],
+  ) => ObjOption[] | Promise<ObjOption[]>;
   searchKey: keyof ObjOption;
 };
 export const ObjOptionSelector: React.FC<ObjOptionSelectorProps> = ({
-  onFilterOptionSelect,
+  input,
+  onFilterValueSelect,
   options,
+  getOptions,
   searchKey,
 }) => {
-  const [loadedOptions, setLoadedOptions] = useState<Awaited<
-    typeof options
-  > | null>(null);
+  const [loadedOptions, setLoadedOptions] = useState<ObjOption[] | undefined>(
+    options,
+  );
   useEffect(() => {
-    setLoadedOptions(null);
-    const awaitOptions = async (currOptions: typeof options) => {
-      const newLoadedOptions = await Promise.resolve(currOptions);
-      setLoadedOptions(newLoadedOptions);
-    };
-    awaitOptions(options);
-  }, [options]);
+    // If options aren't provided, we use the input to getOptions()
+    if (!options && getOptions) {
+      setLoadedOptions(undefined);
+      const awaitOptions = async (currInput: typeof input) => {
+        console.log('awaiting', currInput);
+        const newLoadedOptions = await Promise.resolve(getOptions(currInput));
+        console.log('loaded', newLoadedOptions);
+        setLoadedOptions(newLoadedOptions);
+      };
+      awaitOptions(input);
+    }
+  }, [input]);
+  console.log({
+    input,
+    onFilterValueSelect,
+    options,
+    getOptions,
+    searchKey,
+  });
   return (
-    <Command.List className="focus:border-blue">
+    <>
+      {!loadedOptions && <span>Loading...</span>}
       {loadedOptions &&
-        loadedOptions.map((option) => (
-          <Command.Item onSelect={onFilterOptionSelect} key={option[searchKey]}>
+        loadedOptions.map((option, index) => (
+          <li
+            className={`cursor-pointer p-2 hover:bg-gray-100`}
+            onClick={() =>
+              onFilterValueSelect && onFilterValueSelect([option[searchKey]])
+            }
+            key={option[searchKey]}
+          >
             {option[searchKey]}
-          </Command.Item>
+          </li>
         ))}
-    </Command.List>
+    </>
   );
 };

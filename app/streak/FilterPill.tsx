@@ -1,7 +1,7 @@
-import type { FilterValue } from './FilterBuilderInput';
+import type { FilterValue, FullFilter } from './FilterBuilderInput';
 
-type FilterPillArgs = Partial<FilterValue> & {
-  onDelete: (args: Partial<FilterValue>) => void;
+type FilterPillArgs = Partial<FullFilter> & {
+  onDelete: (args: Partial<FullFilter>) => void;
 };
 
 export const FilterPill = ({
@@ -11,7 +11,6 @@ export const FilterPill = ({
   localId,
   onDelete,
 }: FilterPillArgs) => {
-  console.log({ filterKey, relationalOperator, values, onDelete });
   return (
     <button
       onClick={(_) =>
@@ -26,10 +25,10 @@ export const FilterPill = ({
         }
       }}
       tabIndex={0}
-      className={`inline-flex items-center rounded-s-full rounded-e-${values ? 'full' : 'none'} bg-${values ? 'blue' : 'red'} font-small py-none px-3 text-xs text-white`}
+      className={`inline-flex items-center rounded-s-full rounded-e-${values ? 'full' : 'none'} bg-${values ? 'blue' : 'red'}-500 font-small py-none px-3 text-xs text-black`}
     >
       {filterKey} {relationalOperator} {values?.join(', ')}
-      <div className="hover:bg-blue-600 ml-2 rounded-full p-1 focus:outline-none">
+      <div className="ml-2 rounded-full p-1 hover:bg-blue-600 focus:outline-none">
         <svg
           className="h-4 w-4"
           fill="none"
