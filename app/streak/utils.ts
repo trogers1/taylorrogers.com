@@ -59,7 +59,7 @@ export const filterDefinitions = [
       ...stringRelationalOperators,
       ...inverseStringRelationalOperators,
     ],
-    getOptions: (_: string) => [
+    options: [
       { status: 'Active' },
       { status: 'Inactive' },
       { status: 'Pending' },
