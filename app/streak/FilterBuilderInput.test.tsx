@@ -1,12 +1,6 @@
-import {
-  render,
-  screen,
-  act,
-  waitFor,
-  findByLabelText,
-} from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import {
   FilterBuilderInput,
   type FilterBuilderArgs,
@@ -20,7 +14,7 @@ describe('FilterBuilderInput Component', () => {
   const defaultProps: FilterBuilderArgs = {
     filterState: [] as FilterState,
     onFilterUpdate: () => Promise.resolve(),
-    filterDefinitions,
+    filterDefinitions: [...filterDefinitions],
   };
 
   it.todo(
