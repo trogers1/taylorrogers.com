@@ -21,7 +21,6 @@ export function organizeLabels({
   maxNumber,
 }: NumberLineProps) {
   // Sort and deduplicate positions based on their percentage
-  console.log({ positions, minNumber, maxNumber });
   const sortedPositions = positions
     .map(
       (pos): NumberLineLabelWithPercentage => ({
@@ -32,16 +31,12 @@ export function organizeLabels({
       }),
     )
     .sort((a, b) => a.percentage - b.percentage);
-  console.log({ sortedPositions });
   const deduplicatedLabels = sortedPositions.reduce((acc, curr) => {
-    console.log({ label: 'reduce', acc: [...acc], curr: { ...curr } });
     const duplicatePercentageLabelIndex = acc.findIndex(
       (val) => val.percentage === curr.percentage,
     );
-    console.log({ duplicatePercentageLabelIndex });
     if (duplicatePercentageLabelIndex !== -1) {
       const labelElements = acc[duplicatePercentageLabelIndex].labelElements;
-      console.log({ labelElements });
       acc[duplicatePercentageLabelIndex].labelElements = [
         ...labelElements,
         <hr className="w-full border-t border-gray-300" />,

@@ -47,9 +47,14 @@ export const NumberLine: React.FC<NumberLineProps> = ({
                   className="h-full"
                 ></div>
                 {/* Tick */}
-                <div className="relative h-full w-[3px] border-[1px] border-white bg-black">
+                <div
+                  id={`numberLineTick_${pos.percentage}`}
+                  className="relative h-full w-[3px] border-[1px] border-white bg-black"
+                >
                   {/* Label */}
-                  <div className="absolute left-1/2 top-2 flex -translate-x-1/2 transform flex-col space-y-4 text-xs text-gray-700">
+                  <div className="absolute left-1/2 top-2 flex -translate-x-1/2 transform flex-col items-center justify-center space-y-4 text-xs text-gray-700">
+                    {/* Add the line to the tick on the numberline */}
+                    <div className="h-full min-h-4 w-[1px] bg-gray-300" />
                     {pos.labelElements}
                   </div>
                 </div>
