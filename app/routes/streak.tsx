@@ -32,17 +32,6 @@ export function loader(args: Route.LoaderArgs) {
   return { filterState };
 }
 
-// TODO: Convert to an action with loader
-export const getClientEmails: () => Promise<Record<string, any>[]> = () =>
-  new Promise((resolve) =>
-    resolve([
-      { email: 'timmy@example.com' },
-      { email: 'joe@example.com' },
-      { email: 'vira@example.com' },
-      { email: 'jane@example.com' },
-    ]),
-  );
-
 const StreakPage: React.FC = () => {
   const [filterState, setFilterState] = useState<FilterState>([]);
   console.log({ filterState });
