@@ -1,8 +1,8 @@
 import React from 'react';
-import { NumberLine, type NumberLineLabel } from '../timeline';
+import { NumberLine, type NumberLineProps } from '../numberline';
 
 const Page: React.FC = () => {
-  const positions: NumberLineLabel[] = [
+  const positions: NumberLineProps['positions'] = [
     {
       value: 10,
       labelElements: [<span>Ten Percent</span>],
@@ -19,12 +19,11 @@ const Page: React.FC = () => {
       value: 10,
       labelElements: [<span>10 Percent Again</span>],
     },
-    ,
   ];
 
   return (
     <div className="p-8">
-      <h1 className="mb-8 text-2xl font-bold">Project Timeline</h1>
+      <h1 className="mb-8 text-2xl font-bold">Project Number Line</h1>
       <NumberLine positions={positions} minNumber={0} maxNumber={100} />
     </div>
   );
