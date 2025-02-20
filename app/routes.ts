@@ -10,5 +10,6 @@ export default [
     index('routes/home.tsx'),
     route('/about', 'routes/about.tsx'),
     route('/streak', 'routes/streak.tsx'),
+    route('/timeline', 'routes/timeline.tsx'),
   ]),
 ] satisfies RouteConfig;
