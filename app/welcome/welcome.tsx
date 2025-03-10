@@ -2,7 +2,7 @@ import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 
 export function Welcome({ message }: { message: string }) {
   return (
-    <main className="flex items-center justify-center pb-4 pt-16">
+    <div className="flex items-center justify-center pb-4 pt-16">
       <div className="flex min-h-0 flex-1 flex-col items-center gap-16">
         <h1 className="mb-8 text-4xl font-bold">👋 Welcome to Taylor's Site</h1>
         <p className="mb-8 text-muted-foreground"></p>
@@ -17,7 +17,7 @@ export function Welcome({ message }: { message: string }) {
           </Alert>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
