@@ -24,7 +24,19 @@ const Page: React.FC = () => {
   return (
     <div className="p-8">
       <h1 className="mb-8 text-2xl font-bold">Project Number Line</h1>
-      <NumberLine positions={positions} minNumber={0} maxNumber={100} />
+      <NumberLine
+        bottomLabels={{
+          minLabel: 'Low Compensation',
+          maxLabel: 'High Compensation',
+        }}
+        topLabels={{
+          minLabel: 'High Meaningfulness',
+          maxLabel: 'Low Meaningfulness',
+        }}
+        positions={positions}
+        minNumber={0}
+        maxNumber={100}
+      />
     </div>
   );
 };

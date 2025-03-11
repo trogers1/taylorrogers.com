@@ -1,4 +1,9 @@
-import React, { useMemo, type ReactElement, type ReactNode } from 'react';
+import React, {
+  useMemo,
+  type PropsWithChildren,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import { organizeLabels } from './utils';
 
 // Define the type for a numberline event
@@ -10,12 +15,20 @@ export type NumberLineLabel = {
 // Props for the NumberLine component
 export type NumberLineProps = {
   positions: NumberLineLabel[];
+  topLabels?: { minLabel: string; maxLabel: string };
+  bottomLabels?: { minLabel: string; maxLabel: string };
   minNumber: number;
   maxNumber: number;
 };
 
+const TopAndBottomLabel = (props: PropsWithChildren) => (
+  // <div className="rounded border border-gray-300 bg-gray-100 px-1">
+  <div className="z-10 my-2 bg-background">{props.children}</div>
+);
 export const NumberLine: React.FC<NumberLineProps> = ({
   positions,
+  topLabels,
+  bottomLabels,
   minNumber,
   maxNumber,
 }) => {
@@ -24,12 +37,17 @@ export const NumberLine: React.FC<NumberLineProps> = ({
   }, [positions, minNumber, maxNumber]);
   return (
     <div className="relative w-full">
-      {/* Container for minNumber, maxNumber, and the NumberLine */}
-      <div className="flex justify-between text-sm text-gray-600">
-        <span>{minNumber}</span>
-        <span>{maxNumber}</span>
-      </div>
+      {/* 👆 Container for minNumber, maxNumber, and the NumberLine */}
 
+      {/* 👇 Container for top end-labels */}
+      {topLabels ? (
+        <div className="flex justify-between text-sm text-gray-600">
+          <TopAndBottomLabel>{topLabels.minLabel}</TopAndBottomLabel>
+          <TopAndBottomLabel>{topLabels.maxLabel}</TopAndBottomLabel>
+        </div>
+      ) : (
+        ''
+      )}
       {/* The NumberLine */}
       <div className="relative h-2 w-full bg-gradient-to-r from-[#000004] via-[#3b0f70] via-[#8c2981] via-[#de4968] via-[#fe9f6d] to-[#fcfdbf]">
         {/* Absolute positioned div for ticks and labels */}
@@ -51,10 +69,11 @@ export const NumberLine: React.FC<NumberLineProps> = ({
                   id={`numberLineTick_${pos.percentage}`}
                   className="relative h-full w-[3px] border-[1px] border-white bg-black"
                 >
-                  {/* Label */}
+                  {/* Label Wrapper */}
                   <div className="absolute left-1/2 top-2 flex -translate-x-1/2 transform flex-col items-center justify-center space-y-4 text-xs text-gray-700">
-                    {/* Add the line to the tick on the numberline */}
-                    <div className="h-full min-h-4 w-[1px] bg-gray-300" />
+                    {/* The line from the label to the tick on the numberline */}
+                    <div className="h-full min-h-12 w-[1px] bg-gray-900 dark:bg-gray-300" />
+                    {/* The actual label elements */}
                     {pos.labelElements}
                   </div>
                 </div>
@@ -70,6 +89,16 @@ export const NumberLine: React.FC<NumberLineProps> = ({
           ></div>
         </div>
       </div>
+
+      {/* Container for bottom end-labels */}
+      {bottomLabels ? (
+        <div className="flex justify-between text-sm text-gray-600">
+          <TopAndBottomLabel>{bottomLabels.minLabel}</TopAndBottomLabel>
+          <TopAndBottomLabel>{bottomLabels.maxLabel}</TopAndBottomLabel>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
