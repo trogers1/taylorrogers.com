@@ -10,9 +10,9 @@ export default function RootLayout() {
         <Meta />
         <Links />
       </head>
-      <body className="w-full flex-grow">
+      <body className="flex w-full flex-grow flex-col">
         <Navbar />
-        <main className="size-auto">
+        <main className="w-full flex-grow">
           <Outlet />
           <ScrollRestoration />
           <Scripts />
