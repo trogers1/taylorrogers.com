@@ -1,6 +1,10 @@
 import type { NumberLineLabel, NumberLineProps } from '.';
 
-type NumberLineLabelWithPercentage = NumberLineLabel & { percentage: number };
+type EnrichedNumberLineLabel = NumberLineLabel & {
+  percentage: number;
+  id: string;
+  distanceFromNumberline: number;
+};
 
 // Calculate the percentage position for each value
 const calculatePercentage = ({
@@ -15,6 +19,7 @@ const calculatePercentage = ({
   return ((value - minNumber) / (maxNumber - minNumber)) * 100;
 };
 
+export const defaultLabelToNumberLineDist = 80;
 export function organizeLabels({
   positions,
   minNumber,
@@ -23,11 +28,13 @@ export function organizeLabels({
   // Sort and deduplicate positions based on their percentage
   const sortedPositions = positions
     .map(
-      (pos): NumberLineLabelWithPercentage => ({
+      (pos): EnrichedNumberLineLabel => ({
         ...pos,
         percentage: Math.round(
           calculatePercentage({ value: pos.value, minNumber, maxNumber }),
         ),
+        id: crypto.randomUUID(),
+        distanceFromNumberline: defaultLabelToNumberLineDist,
       }),
     )
     .sort((a, b) => a.percentage - b.percentage);
@@ -46,6 +53,6 @@ export function organizeLabels({
       acc.push(curr);
     }
     return acc;
-  }, [] as Array<NumberLineLabelWithPercentage>);
+  }, [] as Array<EnrichedNumberLineLabel>);
   return deduplicatedLabels;
 }
