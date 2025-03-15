@@ -2,13 +2,13 @@ import React, {
   useMemo,
   type PropsWithChildren,
   type ReactElement,
-  type ReactNode,
 } from 'react';
 import { organizeLabels } from './utils';
 
 // Define the type for a numberline event
 export type NumberLineLabel = {
   value: number;
+  distFromNumberLine?: number;
   labelElements: ReactElement[];
 };
 
@@ -23,7 +23,7 @@ export type NumberLineProps = {
 
 const TopAndBottomLabel = (props: PropsWithChildren) => (
   // <div className="rounded border border-gray-300 bg-gray-100 px-1">
-  <div className="z-10 my-2 bg-background">{props.children}</div>
+  <div className="z-20 my-2 bg-background">{props.children}</div>
 );
 export const NumberLine: React.FC<NumberLineProps> = ({
   positions,
@@ -58,7 +58,7 @@ export const NumberLine: React.FC<NumberLineProps> = ({
             const spaceWidth = pos.percentage - prevPercentage;
 
             return (
-              <React.Fragment key={pos.value}>
+              <React.Fragment key={pos.percentage}>
                 {/* Space between ticks */}
                 <div
                   style={{ width: `${spaceWidth}%` }}
@@ -71,10 +71,28 @@ export const NumberLine: React.FC<NumberLineProps> = ({
                 >
                   {/* Label Wrapper */}
                   <div className="absolute left-1/2 top-2 flex -translate-x-1/2 transform flex-col items-center justify-center space-y-4 text-xs text-gray-700">
+                    {/* TODO: Dynamic positioning of label elements according to overlap.
+
+                        I started this work, but gave up to get the blog post published.
+                        To pick it up again, revert the commit that reverted those changes:
+                        01ddbfe13b83d7d52653ed91785c8e6e0cb6562d
+                    */}
                     {/* The line from the label to the tick on the numberline */}
-                    <div className="h-full min-h-12 w-[1px] bg-gray-900 dark:bg-gray-300" />
+                    {/* The `style` prop is necessary for dynamic styling. See: 
+                        https://stackoverflow.com/a/73899468 */}
+                    <div
+                      style={{
+                        minHeight: `${pos.distFromNumberLine}rem`,
+                      }}
+                      className={`z-10 h-full w-[1px] bg-gray-300 dark:bg-gray-300`}
+                    />
                     {/* The actual label elements */}
-                    {pos.labelElements}
+                    <div
+                      id={`labelWrapper_${pos.percentage}`}
+                      style={{ zIndex: 30 }}
+                    >
+                      {pos.labelElements}
+                    </div>
                   </div>
                 </div>
               </React.Fragment>
