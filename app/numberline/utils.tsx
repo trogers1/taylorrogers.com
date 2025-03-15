@@ -49,7 +49,7 @@ export function organizeLabels({
       const labelElements = acc[duplicatePercentageLabelIndex].labelElements;
       acc[duplicatePercentageLabelIndex].labelElements = [
         ...labelElements,
-        <hr className="w-full border-t border-gray-300" />,
+        <hr className="w-full border-t border-gray-300 dark:border-gray-800" />,
         ...curr.labelElements,
       ];
     } else {
