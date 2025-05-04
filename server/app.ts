@@ -1,5 +1,6 @@
 import { createRequestHandler } from '@react-router/express';
 import express from 'express';
+import helmet from 'helmet';
 import 'react-router';
 
 declare module 'react-router' {
@@ -9,6 +10,7 @@ declare module 'react-router' {
 }
 
 const app = express();
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(
   createRequestHandler({
