@@ -10,7 +10,7 @@ declare module 'react-router' {
 }
 
 const app = express();
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(
   createRequestHandler({
